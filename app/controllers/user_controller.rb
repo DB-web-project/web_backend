@@ -11,8 +11,8 @@ class UserController < ApplicationController
         }, status: :created
       else
         render json: {
-          errors: user.errors.full_messages
-        }, status: :unprocessable_entity
+          errors: user.errors.full_messages.to_s
+        }, status: :bad_request
       end
     end
   end
