@@ -10,18 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_14_091725) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_14_093349) do
   create_table "admins", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.integer "preference"
     t.string "password"
     t.string "avator"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["name"], name: "index_admins_on_name", unique: true
-    t.index ["preference"], name: "index_admins_on_preference"
   end
 
   create_table "announcements", force: :cascade do |t|
@@ -37,7 +35,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_14_091725) do
     t.integer "tag"
     t.float "score"
     t.string "email"
-    t.integer "preference"
     t.string "password"
     t.string "avator"
     t.datetime "created_at", null: false
@@ -102,14 +99,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_14_091725) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.integer "preference"
     t.string "password"
     t.string "avator"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["preference"], name: "index_users_on_preference"
   end
-
-  add_foreign_key "admins", "preferences", column: "preference"
-  add_foreign_key "users", "preferences", column: "preference"
 end

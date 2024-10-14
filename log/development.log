@@ -1308,3 +1308,63 @@ Completed 400 Bad Request in 16ms (Views: 0.2ms | ActiveRecord: 0.9ms (2 queries
   [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
   [1m[36mAdmin Load (0.7ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
   [1m[36mPreference Load (0.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemovePreference (20241014093349)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "ausers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "tindex_ausers_on_preference" ON "ausers" ("preference")[0m
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "ausers" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "users"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "users"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "users" ("id","name","email","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","password","avator","created_at","updated_at" FROM "ausers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "ausers"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aadmins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aadmins_on_preference" ON "aadmins" ("preference")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aadmins_on_name" ON "aadmins" ("name")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aadmins_on_email" ON "aadmins" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aadmins" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "admins"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "admins"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "admins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_email" ON "admins" ("email")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_name" ON "admins" ("name")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "admins" ("id","name","email","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","password","avator","created_at","updated_at" FROM "aadmins"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "aadmins"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "abusinesses" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "tag" integer, "score" float, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "abusinesses" ("id","name","tag","score","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","tag","score","email","preference","password","avator","created_at","updated_at" FROM "businesses"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "businesses"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "businesses" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "tag" integer, "score" float, "email" varchar, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "businesses" ("id","name","tag","score","email","password","avator","created_at","updated_at")
+                     SELECT "id","name","tag","score","email","password","avator","created_at","updated_at" FROM "abusinesses"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "abusinesses"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241014093349') RETURNING "version"[0m
+  [1m[36mTRANSACTION (11.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mAdmin Load (0.6ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mAdmin Load (0.7ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
