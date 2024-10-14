@@ -568,3 +568,743 @@ Can't verify CSRF token authenticity.
 Completed 400 Bad Request in 76ms (Views: 0.4ms | ActiveRecord: 13.9ms (2 queries, 0 cached) | GC: 0.0ms)
 
 
+Started POST "/user/register" for ::1 at 2024-10-13 11:42:32 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UserController#register as */*
+  Parameters: {"name"=>"xzq", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "user"=>{"name"=>"xzq", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:4:in `block in register'
+  [1m[36mUser Exists? (4.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "xzq"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "xzq"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-13 03:42:32.672419"], ["updated_at", "2024-10-13 03:42:32.672419"]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-13 03:42:32.701341"], ["updated_at", "2024-10-13 03:42:32.701341"]]
+  ↳ app/controllers/user_controller.rb:6:in `block in register'
+  [1m[36mTRANSACTION (12.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_controller.rb:3:in `register'
+Completed 201 Created in 109ms (Views: 0.5ms | ActiveRecord: 25.1ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2024-10-14 15:56:15 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/dqr/.rvm/gems/ruby-3.3.4/gems/railties-7.2.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/dqr/.rvm/gems/ruby-3.3.4/gems/railties-7.2.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.0ms | GC: 0.0ms)
+Completed 200 OK in 15ms (Views: 5.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/register" for ::1 at 2024-10-14 15:57:51 +0800
+  
+ActionController::RoutingError (No route matches [POST] "/admin/register"):
+  
+Started POST "/admin/register" for ::1 at 2024-10-14 15:58:21 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"杜启嵘大帝", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"杜启嵘大帝", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:4:in `block in register'
+  [1m[36mAdmin Create (0.3ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "杜启嵘大帝"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 07:58:22.009001"], ["updated_at", "2024-10-14 07:58:22.009001"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.5ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 07:58:22.045052"], ["updated_at", "2024-10-14 07:58:22.045052"]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mTRANSACTION (6.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 201 Created in 108ms (Views: 0.6ms | ActiveRecord: 19.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/register" for ::1 at 2024-10-14 15:58:56 +0800
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"杜启嵘大帝", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"杜启嵘大帝", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Create (3.8ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "杜启嵘大帝"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 07:58:56.760351"], ["updated_at", "2024-10-14 07:58:56.760351"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 07:58:56.786477"], ["updated_at", "2024-10-14 07:58:56.786477"]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 201 Created in 54ms (Views: 0.3ms | ActiveRecord: 5.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUniqueIndexToAdmins (20241014080224)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_email" ON "admins" ("email")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (11.7ms)[0m  [1m[31m
+  DELETE FROM admins WHERE rowid NOT IN (
+    SELECT MIN(rowid) FROM admins GROUP BY email
+  )
+[0m
+  [1m[35m (1.3ms)[0m  [1m[31m
+  DELETE FROM admins WHERE rowid NOT IN (
+    SELECT MIN(rowid) FROM admins GROUP BY name
+  )
+[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUniqueIndexToAdmins (20241014080224)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_email" ON "admins" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_name" ON "admins" ("name")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241014080224') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/admin/register" for ::1 at 2024-10-14 16:09:40 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ArgumentError (Unknown key: :presence. Valid keys are: :on, :if, :unless, :prepend. Perhaps you meant to call `validates` instead of `validate`?):
+  
+app/models/admin.rb:4:in `<class:Admin>'
+app/models/admin.rb:1:in `<main>'
+Started POST "/admin/register" for ::1 at 2024-10-14 16:10:27 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"杜启嵘大帝", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"杜启嵘大帝", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:4:in `block in register'
+  [1m[36mAdmin Exists? (4.9ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "杜启嵘大帝"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 400 Bad Request in 74ms (Views: 0.4ms | ActiveRecord: 14.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/register" for ::1 at 2024-10-14 16:10:35 +0800
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"杜启嵘大帝", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"杜启嵘大帝", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (3.0ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "杜启嵘大帝"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 400 Bad Request in 39ms (Views: 0.4ms | ActiveRecord: 5.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/register" for ::1 at 2024-10-14 16:10:48 +0800
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"杜启嵘大帝", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"杜启嵘大帝", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (6.2ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "杜启嵘大帝"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 400 Bad Request in 78ms (Views: 0.9ms | ActiveRecord: 8.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mAdmin Load (0.5ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/admin/register" for ::1 at 2024-10-14 16:17:45 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"无敌螃蟹", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"无敌螃蟹", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:4:in `block in register'
+  [1m[36mAdmin Exists? (4.3ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "无敌螃蟹"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Create (0.8ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "无敌螃蟹"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 08:17:45.512182"], ["updated_at", "2024-10-14 08:17:45.512182"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.3ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 08:17:45.552069"], ["updated_at", "2024-10-14 08:17:45.552069"]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (1.7ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."admin_id" = ? LIMIT ?[0m  [["admin_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 188ms (ActiveRecord: 21.1ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: preferences.admin_id):
+
+Causes:
+SQLite3::SQLException (no such column: preferences.admin_id)
+  
+Started POST "/admin/register" for ::1 at 2024-10-14 16:17:50 +0800
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"无敌螃蟹", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"无敌螃蟹", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (5.3ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "无敌螃蟹"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Create (0.5ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "无敌螃蟹"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 08:17:50.379403"], ["updated_at", "2024-10-14 08:17:50.379403"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.6ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 08:17:50.403843"], ["updated_at", "2024-10-14 08:17:50.403843"]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (0.6ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."admin_id" = ? LIMIT ?[0m  [["admin_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 65ms (ActiveRecord: 8.3ms (5 queries, 0 cached) | GC: 1.4ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: preferences.admin_id):
+
+Causes:
+SQLite3::SQLException (no such column: preferences.admin_id)
+  
+Started POST "/admin/register" for ::1 at 2024-10-14 16:19:11 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"无敌螃蟹", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"无敌螃蟹", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:4:in `block in register'
+  [1m[36mAdmin Exists? (4.3ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "无敌螃蟹"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Create (0.4ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "无敌螃蟹"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 08:19:11.793704"], ["updated_at", "2024-10-14 08:19:11.793704"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 08:19:11.823254"], ["updated_at", "2024-10-14 08:19:11.823254"]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 111ms (ActiveRecord: 14.4ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Preference(#22080) expected, got 9 which is an instance of Integer(#2780)):
+  
+app/controllers/admin_controller.rb:7:in `block in register'
+app/controllers/admin_controller.rb:3:in `register'
+Started POST "/admin/register" for ::1 at 2024-10-14 16:23:26 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NoMethodError (undefined method `id' for an instance of Symbol):
+  
+app/models/admin.rb:2:in `<class:Admin>'
+app/models/admin.rb:1:in `<main>'
+Started POST "/admin/register" for ::1 at 2024-10-14 16:25:26 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"无敌螃蟹", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"无敌螃蟹", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:4:in `block in register'
+  [1m[36mAdmin Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "无敌螃蟹"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Create (0.4ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "无敌螃蟹"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 08:25:26.312750"], ["updated_at", "2024-10-14 08:25:26.312750"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 08:25:26.339086"], ["updated_at", "2024-10-14 08:25:26.339086"]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (1.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."admin_id" = ? LIMIT ?[0m  [["admin_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 119ms (ActiveRecord: 14.7ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: preferences.admin_id):
+
+Causes:
+SQLite3::SQLException (no such column: preferences.admin_id)
+  
+Started POST "/admin/register" for ::1 at 2024-10-14 16:27:55 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"无敌螃蟹", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"无敌螃蟹", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:4:in `block in register'
+  [1m[36mAdmin Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "无敌螃蟹"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Create (0.4ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "无敌螃蟹"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 08:27:55.901789"], ["updated_at", "2024-10-14 08:27:55.901789"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.3ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 08:27:55.939449"], ["updated_at", "2024-10-14 08:27:55.939449"]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (1.6ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."admin_id" = ? LIMIT ?[0m  [["admin_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 151ms (ActiveRecord: 15.8ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: preferences.admin_id):
+
+Causes:
+SQLite3::SQLException (no such column: preferences.admin_id)
+  
+Started POST "/admin/register" for ::1 at 2024-10-14 16:36:28 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"无敌螃蟹", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"无敌螃蟹", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:4:in `block in register'
+  [1m[36mAdmin Exists? (3.6ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "无敌螃蟹"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Create (0.4ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "无敌螃蟹"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 08:36:28.534753"], ["updated_at", "2024-10-14 08:36:28.534753"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 08:36:28.562128"], ["updated_at", "2024-10-14 08:36:28.562128"]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (1.0ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."admin_id" = ? LIMIT ?[0m  [["admin_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 108ms (ActiveRecord: 14.1ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: preferences.admin_id):
+
+Causes:
+SQLite3::SQLException (no such column: preferences.admin_id)
+  
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTruncate Tables (12.5ms)[0m  [1m[31mDELETE FROM "users";
+DELETE FROM "admins";
+DELETE FROM "businesses";
+DELETE FROM "commodities";
+DELETE FROM "announcements";
+DELETE FROM "posts";
+DELETE FROM "comments";
+DELETE FROM "preferences";
+DELETE FROM "tags"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mAdmin Load (1.5ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/" for 127.0.0.1 at 2024-10-14 16:41:59 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/dqr/.rvm/gems/ruby-3.3.4/gems/railties-7.2.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/dqr/.rvm/gems/ruby-3.3.4/gems/railties-7.2.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.0ms | GC: 0.0ms)
+Completed 200 OK in 14ms (Views: 4.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/user/register" for ::1 at 2024-10-14 16:42:31 +0800
+Processing by UserController#register as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:4:in `block in register'
+  [1m[36mUser Exists? (4.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "杜启嵘"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 08:42:32.132553"], ["updated_at", "2024-10-14 08:42:32.132553"]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.5ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 08:42:32.182203"], ["updated_at", "2024-10-14 08:42:32.182203"]]
+  ↳ app/controllers/user_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (2.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = ? LIMIT ?[0m  [["user_id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/user_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 176ms (ActiveRecord: 32.6ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: preferences.user_id):
+
+Causes:
+SQLite3::SQLException (no such column: preferences.user_id)
+  
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddForeignKeyToAdmins (20241014085356)
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddForeignKeyToAdmins (20241014085356)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aadmins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aadmins_on_name" ON "aadmins" ("name")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aadmins_on_email" ON "aadmins" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aadmins" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "admins"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "admins"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "admins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_60f068a0bf"
+FOREIGN KEY ("preference_id")
+  REFERENCES "preferences" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddForeignKeyToAdmins (20241014085356)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aadmins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aadmins_on_name" ON "aadmins" ("name")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aadmins_on_email" ON "aadmins" ("email")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aadmins" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "admins"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "admins"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "admins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fd50316dcb"
+FOREIGN KEY ("preference")
+  REFERENCES "preferences" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_email" ON "admins" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_name" ON "admins" ("name")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "admins" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "aadmins"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aadmins"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_admins_on_preference" ON "admins" ("preference")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "ausers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "ausers" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_13eed78cb7"
+FOREIGN KEY ("preference")
+  REFERENCES "preferences" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "users" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "ausers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "ausers"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_users_on_preference" ON "users" ("preference")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241014085356') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/user/register" for ::1 at 2024-10-14 16:59:00 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UserController#register as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:4:in `block in register'
+  [1m[36mUser Exists? (3.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "杜启嵘"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 08:59:01.109219"], ["updated_at", "2024-10-14 08:59:01.109219"]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 08:59:01.143077"], ["updated_at", "2024-10-14 08:59:01.143077"]]
+  ↳ app/controllers/user_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (1.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/user_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 125ms (ActiveRecord: 14.5ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: preferences.user_id):
+
+Causes:
+SQLite3::SQLException (no such column: preferences.user_id)
+  
+Started POST "/user/register" for ::1 at 2024-10-14 16:59:04 +0800
+Processing by UserController#register as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "杜启嵘"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 08:59:04.753084"], ["updated_at", "2024-10-14 08:59:04.753084"]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.6ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 08:59:04.778452"], ["updated_at", "2024-10-14 08:59:04.778452"]]
+  ↳ app/controllers/user_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (0.6ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/user_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 60ms (ActiveRecord: 4.7ms (5 queries, 0 cached) | GC: 1.8ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: preferences.user_id):
+
+Causes:
+SQLite3::SQLException (no such column: preferences.user_id)
+  
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddPolymorphicAssociationToPreferences (20241014090634)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apreferences" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preference1" varchar, "preference2" varchar, "preference3" varchar, "preference4" varchar, "preference5" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "apreferences" ("id","preference1","preference2","preference3","preference4","preference5","created_at","updated_at")
+                     SELECT "id","preference1","preference2","preference3","preference4","preference5","created_at","updated_at" FROM "preferences"[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE "preferences"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "preferences" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preference1" varchar, "preference2" varchar, "preference3" varchar, "preference4" varchar, "preference5" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "preferable_type" varchar NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "preferences" ("id","preference1","preference2","preference3","preference4","preference5","created_at","updated_at")
+                     SELECT "id","preference1","preference2","preference3","preference4","preference5","created_at","updated_at" FROM "apreferences"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "apreferences"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apreferences" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preference1" varchar, "preference2" varchar, "preference3" varchar, "preference4" varchar, "preference5" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "preferable_type" varchar NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apreferences" ("id","preference1","preference2","preference3","preference4","preference5","created_at","updated_at","preferable_type")
+                     SELECT "id","preference1","preference2","preference3","preference4","preference5","created_at","updated_at","preferable_type" FROM "preferences"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "preferences"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "preferences" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preference1" varchar, "preference2" varchar, "preference3" varchar, "preference4" varchar, "preference5" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "preferable_type" varchar NOT NULL, "preferable_id" integer NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "preferences" ("id","preference1","preference2","preference3","preference4","preference5","created_at","updated_at","preferable_type")
+                     SELECT "id","preference1","preference2","preference3","preference4","preference5","created_at","updated_at","preferable_type" FROM "apreferences"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "apreferences"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_preferences_on_preferable" ON "preferences" ("preferable_type", "preferable_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241014090634') RETURNING "version"[0m
+  [1m[36mTRANSACTION (11.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/user/register" for ::1 at 2024-10-14 17:08:46 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UserController#register as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:4:in `block in register'
+  [1m[36mUser Exists? (3.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "杜启嵘"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 09:08:46.491453"], ["updated_at", "2024-10-14 09:08:46.491453"]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 09:08:46.530071"], ["updated_at", "2024-10-14 09:08:46.530071"], ["preferable_type", "User"], ["preferable_id", 1]]
+  ↳ app/controllers/user_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (1.8ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 1], ["preferable_type", "User"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? AND "users"."id" != ? LIMIT ?[0m  [["name", "杜启嵘"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "avator" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-14 09:08:46.569694"], ["id", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (23.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_controller.rb:3:in `register'
+Completed 201 Created in 199ms (Views: 0.4ms | ActiveRecord: 40.1ms (8 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/user/register" for ::1 at 2024-10-14 17:08:55 +0800
+Processing by UserController#register as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (4.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_controller.rb:3:in `register'
+Completed 400 Bad Request in 126ms (Views: 0.4ms | ActiveRecord: 7.0ms (2 queries, 0 cached) | GC: 72.3ms)
+
+
+Started POST "/user/register" for ::1 at 2024-10-14 17:09:00 +0800
+Processing by UserController#register as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_controller.rb:3:in `register'
+Completed 400 Bad Request in 24ms (Views: 0.5ms | ActiveRecord: 2.3ms (2 queries, 0 cached) | GC: 1.5ms)
+
+
+Started POST "/admin/register" for ::1 at 2024-10-14 17:09:05 +0800
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"无敌螃蟹", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"无敌螃蟹", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:4:in `block in register'
+  [1m[36mAdmin Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "无敌螃蟹"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Create (0.2ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "preference", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "无敌螃蟹"], ["email", "[FILTERED]"], ["preference", nil], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-14 09:09:05.333779"], ["updated_at", "2024-10-14 09:09:05.333779"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-14 09:09:05.347670"], ["updated_at", "2024-10-14 09:09:05.347670"], ["preferable_type", "Admin"], ["preferable_id", 1]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 1], ["preferable_type", "Admin"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mAdmin Update (0.1ms)[0m  [1m[33mUPDATE "admins" SET "avator" = ?, "updated_at" = ? WHERE "admins"."id" = ?[0m  [["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-14 09:09:05.367539"], ["id", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 201 Created in 67ms (Views: 0.3ms | ActiveRecord: 5.8ms (6 queries, 0 cached) | GC: 2.7ms)
+
+
+Started POST "/admin/register" for ::1 at 2024-10-14 17:09:10 +0800
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"无敌螃蟹", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"无敌螃蟹", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "无敌螃蟹"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 400 Bad Request in 28ms (Views: 0.5ms | ActiveRecord: 2.2ms (2 queries, 0 cached) | GC: 1.9ms)
+
+
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mAdmin Load (0.7ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mPreference Load (0.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemovePreferenceFromUsers (20241014091724)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemovePreferenceFromUsers (20241014091724)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "ausers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "tindex_ausers_on_preference" ON "ausers" ("preference")[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "ausers" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "users"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "users"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_13eed78cb7"
+FOREIGN KEY ("preference")
+  REFERENCES "preferences" ("id")
+)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_users_on_preference" ON "users" ("preference")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "users" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "ausers"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "ausers"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241014091724') RETURNING "version"[0m
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to RemovePreferenceFromAdmins (20241014091725)
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemovePreferenceFromAdmins (20241014091725)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aadmins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "tindex_aadmins_on_preference" ON "aadmins" ("preference")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aadmins_on_name" ON "aadmins" ("name")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aadmins_on_email" ON "aadmins" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aadmins" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "admins"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "admins"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "admins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "preference" integer, "password" varchar, "avator" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fd50316dcb"
+FOREIGN KEY ("preference")
+  REFERENCES "preferences" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_email" ON "admins" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_name" ON "admins" ("name")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_admins_on_preference" ON "admins" ("preference")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "admins" ("id","name","email","preference","password","avator","created_at","updated_at")
+                     SELECT "id","name","email","preference","password","avator","created_at","updated_at" FROM "aadmins"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aadmins"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241014091725') RETURNING "version"[0m
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mAdmin Load (0.7ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/admin/register" for ::1 at 2024-10-14 17:23:29 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"无敌螃蟹", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"无敌螃蟹", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "无敌螃蟹"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 400 Bad Request in 21ms (Views: 0.2ms | ActiveRecord: 2.5ms (2 queries, 0 cached) | GC: 1.0ms)
+
+
+Started POST "/user/register" for ::1 at 2024-10-14 17:23:33 +0800
+Processing by UserController#register as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_controller.rb:3:in `register'
+Completed 400 Bad Request in 16ms (Views: 0.2ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.4ms)
+
+
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mAdmin Load (0.7ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mPreference Load (0.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]

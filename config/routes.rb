@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   # Define your application routes here
   # User
   post '/user/register' => 'user#register', as: :user_register
+
+  # Admin
+  post '/admin/register' => 'admin#register', as: :admin_register
   # Defines the root path route ("/")
   # root "posts#index"
 end

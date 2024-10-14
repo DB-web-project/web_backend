@@ -1,13 +1,14 @@
 class UserController < ApplicationController
   def register
-    ActiveRecord::Base.transaction do # 两个表的数据要么同时成功，要么同时失败
+    ActiveRecord::Base.transaction do
       user = User.new(user_params)
       if user.save
-        preference = Preference.create
+        preference = Preference.create(preferable: user)
+        user.update(preference: preference, avator: '/path/to/default/avator.jpg')
         render json: {
           id: user.id,
-          preference: preference.id,
-          avator: '/path/to/default/avator.jpg'
+          preference: user.preference.id,
+          avator: user.avator
         }, status: :created
       else
         render json: {
