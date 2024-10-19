@@ -37,12 +37,16 @@ class AdminController < ApplicationController
     end
   end
 
-  def extract_preferences(preference)
-    [preference.preference1, preference.preference2, preference.preference3, preference.preference4,
-     preference.preference5]
-  end
-
   private
+
+  def extract_preferences(preference)
+    if preference
+      [preference.preference1, preference.preference2, preference.preference3, preference.preference4,
+       preference.preference5].compact
+    else
+      []
+    end
+  end
 
   def admin_params
     {

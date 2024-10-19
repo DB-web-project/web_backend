@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   # Business
   post '/business/register' => 'business#register', as: :business_register
+  post '/business/login' => 'business#login', as: :business_login
 
   # Business
   post '/commodity/register' => 'commodity#register', as: :commodity_register

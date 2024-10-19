@@ -2457,3 +2457,298 @@ Processing by AdminController#login as */*
 Completed 200 OK in 236ms (Views: 0.5ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
 
 
+  [1m[36mBusiness Load (4.9ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mBusiness Delete All (0.3ms)[0m  [1m[31mDELETE FROM "businesses"[0m
+  [1m[36mBusiness Delete All (0.2ms)[0m  [1m[31mDELETE FROM "businesses"[0m
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 15:53:29 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [POST] "/business/login"):
+  
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 15:53:48 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 3.8ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+  
+NameError (undefined local variable or method `name' for an instance of BusinessController):
+  
+app/controllers/business_controller.rb:27:in `login'
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 15:55:27 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (2.0ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:22:in `login'
+Completed 401 Unauthorized in 34ms (Views: 0.6ms | ActiveRecord: 8.3ms (1 query, 0 cached) | GC: 0.7ms)
+
+
+  [1m[36mBusiness Delete All (0.2ms)[0m  [1m[31mDELETE FROM "businesses"[0m
+  [1m[36mBusiness Delete All (0.2ms)[0m  [1m[31mDELETE FROM "businesses"[0m
+  [1m[36mBusiness Delete All (0.2ms)[0m  [1m[31mDELETE FROM "businesses"[0m
+  [1m[36mBusiness Delete All (0.2ms)[0m  [1m[31mDELETE FROM "businesses"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mBusiness Load (2.7ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mBusiness Delete All (0.4ms)[0m  [1m[31mDELETE FROM "businesses"[0m
+  [1m[36mPreference Delete All (9.7ms)[0m  [1m[31mDELETE FROM "preferences"[0m
+  [1m[36mTag Delete All (0.1ms)[0m  [1m[31mDELETE FROM "tags"[0m
+  [1m[36mCommodity Delete All (0.3ms)[0m  [1m[31mDELETE FROM "commodities"[0m
+  [1m[36mBusiness Delete All (0.6ms)[0m  [1m[31mDELETE FROM "businesses"[0m
+Started POST "/business/register" for 127.0.0.1 at 2024-10-19 16:01:27 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BusinessController#register as */*
+  Parameters: {"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:6:in `block in register'
+  [1m[36mBusiness Exists? (3.3ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mBusiness Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mBusiness Create (0.3ms)[0m  [1m[32mINSERT INTO "businesses" ("name", "tag", "score", "email", "password", "avator", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "麻辣烫"], ["tag", nil], ["score", nil], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 08:01:28.410853"], ["updated_at", "2024-10-19 08:01:28.410853"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 08:01:28.443765"], ["updated_at", "2024-10-19 08:01:28.443765"], ["preferable_type", "Business"], ["preferable_id", 2]]
+  ↳ app/controllers/business_controller.rb:8:in `block in register'
+  [1m[36mPreference Load (1.5ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 2], ["preferable_type", "Business"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:9:in `block in register'
+  [1m[36mBusiness Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:9:in `block in register'
+  [1m[36mBusiness Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["name", "麻辣烫"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:9:in `block in register'
+  [1m[36mBusiness Update (0.9ms)[0m  [1m[33mUPDATE "businesses" SET "avator" = ?, "updated_at" = ? WHERE "businesses"."id" = ?[0m  [["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-19 08:01:28.489515"], ["id", 2]]
+  ↳ app/controllers/business_controller.rb:9:in `block in register'
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/business_controller.rb:5:in `register'
+Completed 201 Created in 376ms (Views: 0.5ms | ActiveRecord: 16.8ms (8 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:01:37 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (1.0ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:22:in `login'
+  [1m[36mPreference Load (0.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:24:in `login'
+  [1m[36mTag Load (1.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:25:in `login'
+Completed 500 Internal Server Error in 245ms (ActiveRecord: 1.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `tag1' for nil):
+  
+app/controllers/business_controller.rb:51:in `extract_tags'
+app/controllers/business_controller.rb:28:in `login'
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:02:56 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (0.2ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:22:in `login'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:24:in `login'
+  [1m[36mTag Load (0.5ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:25:in `login'
+Completed 200 OK in 239ms (Views: 0.3ms | ActiveRecord: 3.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mBusiness Delete All (3.9ms)[0m  [1m[31mDELETE FROM "businesses"[0m
+Started POST "/business/register" for 127.0.0.1 at 2024-10-19 16:06:20 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BusinessController#register as */*
+  Parameters: {"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:6:in `block in register'
+  [1m[36mBusiness Exists? (3.3ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mBusiness Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mBusiness Create (0.3ms)[0m  [1m[32mINSERT INTO "businesses" ("name", "tag", "score", "email", "password", "avator", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "麻辣烫"], ["tag", nil], ["score", nil], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 08:06:20.441115"], ["updated_at", "2024-10-19 08:06:20.441115"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 08:06:20.471699"], ["updated_at", "2024-10-19 08:06:20.471699"], ["preferable_type", "Business"], ["preferable_id", 3]]
+  ↳ app/controllers/business_controller.rb:8:in `block in register'
+  [1m[36mPreference Load (1.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 3], ["preferable_type", "Business"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mTag Load (0.5ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mTag Create (0.6ms)[0m  [1m[32mINSERT INTO "tags" ("tag1", "tag2", "tag3", "tag4", "tag5", "created_at", "updated_at", "business_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["tag1", nil], ["tag2", nil], ["tag3", nil], ["tag4", nil], ["tag5", nil], ["created_at", "2024-10-19 08:06:20.530185"], ["updated_at", "2024-10-19 08:06:20.530185"], ["business_id", 3]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mBusiness Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mBusiness Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["name", "麻辣烫"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mBusiness Update (1.5ms)[0m  [1m[33mUPDATE "businesses" SET "score" = ?, "avator" = ?, "updated_at" = ? WHERE "businesses"."id" = ?[0m  [["score", 10.0], ["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-19 08:06:20.568054"], ["id", 3]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/business_controller.rb:5:in `register'
+Completed 201 Created in 384ms (Views: 0.4ms | ActiveRecord: 14.2ms (10 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:06:42 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `name' for an instance of BusinessController):
+  
+app/controllers/business_controller.rb:27:in `login'
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:07:43 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (0.8ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:27:in `login'
+  [1m[36mPreference Load (3.7ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:29:in `login'
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:30:in `login'
+Completed 200 OK in 315ms (Views: 0.5ms | ActiveRecord: 9.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:08:02 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (1.0ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:27:in `login'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:29:in `login'
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:30:in `login'
+Completed 200 OK in 221ms (Views: 0.5ms | ActiveRecord: 0.8ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:08:43 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (0.4ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:27:in `login'
+  [1m[36mPreference Load (4.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:29:in `login'
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:30:in `login'
+Completed 200 OK in 278ms (Views: 0.4ms | ActiveRecord: 8.8ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:11:31 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (0.3ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:27:in `login'
+  [1m[36mPreference Load (1.4ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:29:in `login'
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:30:in `login'
+Completed 200 OK in 284ms (Views: 0.3ms | ActiveRecord: 5.3ms (3 queries, 0 cached) | GC: 23.1ms)
+
+
+Started POST "/user/login" for 127.0.0.1 at 2024-10-19 16:12:30 +0800
+Processing by UserController#login as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:24:in `login'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "User"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:26:in `login'
+Completed 500 Internal Server Error in 220ms (ActiveRecord: 2.3ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+  
+NoMethodError (undefined method `preference1' for nil):
+  
+app/controllers/user_controller.rb:43:in `extract_preferences'
+app/controllers/user_controller.rb:30:in `login'
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:12:47 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:27:in `login'
+  [1m[36mPreference Load (0.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:29:in `login'
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:30:in `login'
+Completed 200 OK in 284ms (Views: 1.2ms | ActiveRecord: 3.3ms (3 queries, 0 cached) | GC: 7.2ms)
+
+
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:12:51 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (0.3ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:27:in `login'
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:29:in `login'
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:30:in `login'
+Completed 200 OK in 224ms (Views: 0.5ms | ActiveRecord: 0.6ms (3 queries, 0 cached) | GC: 6.1ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 16:13:00 +0800
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"石通", "password"=>"[FILTERED]", "admin"=>{"name"=>"石通", "password"=>"[FILTERED]"}}
+  [1m[36mAdmin Load (0.2ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "石通"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:24:in `login'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Admin"], ["preferable_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:26:in `login'
+Completed 500 Internal Server Error in 248ms (ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 32.7ms)
+
+
+  
+NoMethodError (undefined method `preference1' for nil):
+  
+app/controllers/admin_controller.rb:43:in `extract_preferences'
+app/controllers/admin_controller.rb:30:in `login'
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 16:14:03 +0800
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"石通", "password"=>"[FILTERED]", "admin"=>{"name"=>"石通", "password"=>"[FILTERED]"}}
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "石通"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:24:in `login'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Admin"], ["preferable_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:26:in `login'
+Completed 200 OK in 218ms (Views: 0.3ms | ActiveRecord: 1.7ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 16:14:23 +0800
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"石通", "password"=>"[FILTERED]", "admin"=>{"name"=>"石通", "password"=>"[FILTERED]"}}
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "石通"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:24:in `login'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Admin"], ["preferable_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:26:in `login'
+Completed 200 OK in 210ms (Views: 0.8ms | ActiveRecord: 1.3ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:14:52 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:27:in `login'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:29:in `login'
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:30:in `login'
+Completed 200 OK in 239ms (Views: 0.3ms | ActiveRecord: 1.8ms (3 queries, 0 cached) | GC: 5.8ms)
+
+
+Started POST "/user/login" for 127.0.0.1 at 2024-10-19 16:15:12 +0800
+Processing by UserController#login as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:24:in `login'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "User"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:26:in `login'
+Completed 200 OK in 233ms (Views: 0.7ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/business/login" for 127.0.0.1 at 2024-10-19 16:15:24 +0800
+Processing by BusinessController#login as */*
+  Parameters: {"name"=>"麻辣烫", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "password"=>"[FILTERED]"}}
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:27:in `login'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:29:in `login'
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:30:in `login'
+Completed 200 OK in 228ms (Views: 0.3ms | ActiveRecord: 0.2ms (3 queries, 0 cached) | GC: 1.0ms)
+
+
