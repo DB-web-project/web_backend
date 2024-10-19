@@ -4912,3 +4912,38 @@ Processing by BusinessController#find_by_id as */*
 Completed 200 OK in 33ms (Views: 0.1ms | ActiveRecord: 0.8ms (3 queries, 0 cached) | GC: 2.0ms)
 
 
+Started PUT "/user/preference/4" for 127.0.0.1 at 2024-10-19 22:10:58 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UserController#update_preference_by_id as */*
+  Parameters: {"preferences"=>["火锅", "烧烤"], "id"=>"4", "user"=>{}}
+  [1m[36mPreference Load (0.6ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "User"], ["preferable_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:87:in `update_preference_by_id'
+Completed 200 OK in 56ms (Views: 0.4ms | ActiveRecord: 2.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/user/preference/4" for 127.0.0.1 at 2024-10-19 22:15:29 +0800
+Processing by UserController#update_preference_by_id as */*
+  Parameters: {"preferences"=>["川菜", "东北菜", "鲁菜"], "id"=>"4", "user"=>{}}
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "User"], ["preferable_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:87:in `update_preference_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:89:in `update_preference_by_id'
+  [1m[36mPreference Update (1.6ms)[0m  [1m[33mUPDATE "preferences" SET "preference1" = ?, "preference2" = ?, "preference3" = ?, "updated_at" = ? WHERE "preferences"."id" = ?[0m  [["preference1", "川菜"], ["preference2", "东北菜"], ["preference3", "鲁菜"], ["updated_at", "2024-10-19 14:15:29.502357"], ["id", 11]]
+  ↳ app/controllers/user_controller.rb:89:in `update_preference_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_controller.rb:89:in `update_preference_by_id'
+Completed 200 OK in 42ms (Views: 0.2ms | ActiveRecord: 1.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/find/4" for 127.0.0.1 at 2024-10-19 22:15:45 +0800
+Processing by UserController#find_by_id as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:41:in `find_by_id'
+  [1m[36mPreference Load (0.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "User"], ["preferable_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:43:in `find_by_id'
+Completed 200 OK in 29ms (Views: 0.2ms | ActiveRecord: 2.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mPreference Load (0.7ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
