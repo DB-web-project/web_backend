@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # Define your application routes here
   # User
   post '/user/register' => 'user#register', as: :user_register
+  post '/user/login' => 'user#login', as: :user_login
 
   # Admin
   post '/admin/register' => 'admin#register', as: :admin_register
