@@ -3111,3 +3111,191 @@ Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 0.3ms (1 query, 0 cached) 
 
 
   [1m[36mAnnouncement Load (0.1ms)[0m  [1m[34mSELECT "announcements".* FROM "announcements" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mCommodity Load (4.4ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 19:43:22 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CommodityController#register as */*
+  Parameters: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1, "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:4:in `block in register'
+  [1m[36mBusiness Load (1.3ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mCommodity Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? LIMIT ?[0m  [["name", "黄桃罐头"], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:3:in `register'
+Completed 400 Bad Request in 86ms (Views: 0.6ms | ActiveRecord: 12.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mCommodity Load (1.9ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 19:44:09 +0800
+Processing by CommodityController#register as */*
+  Parameters: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1, "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mBusiness Load (2.4ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mCommodity Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? LIMIT ?[0m  [["name", "黄桃罐头"], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:3:in `register'
+Completed 400 Bad Request in 37ms (Views: 0.2ms | ActiveRecord: 3.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mBusiness Load (0.8ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 19:44:37 +0800
+Processing by CommodityController#register as */*
+  Parameters: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>3, "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>3}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mBusiness Load (1.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mCommodity Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? LIMIT ?[0m  [["name", "黄桃罐头"], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mCommodity Create (0.2ms)[0m  [1m[32mINSERT INTO "commodities" ("name", "price", "score", "introduction", "business_id", "homepage", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "黄桃罐头"], ["price", 26.0], ["score", nil], ["introduction", "黄桃罐头是一种水果罐头"], ["business_id", 3], ["homepage", nil], ["created_at", "2024-10-19 11:44:37.320709"], ["updated_at", "2024-10-19 11:44:37.320709"]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (10.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:3:in `register'
+Completed 201 Created in 41ms (Views: 0.2ms | ActiveRecord: 11.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mCommodity Load (0.3ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/commodity/find/2" for 127.0.0.1 at 2024-10-19 19:45:01 +0800
+Processing by CommodityController#find_by_id as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mCommodity Load (0.5ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:20:in `find_by_id'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/business/register" for 127.0.0.1 at 2024-10-19 19:46:13 +0800
+Processing by BusinessController#register as */*
+  Parameters: {"name"=>"商店", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "business"=>{"name"=>"商店", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:6:in `block in register'
+  [1m[36mBusiness Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mBusiness Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "商店"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mBusiness Create (0.8ms)[0m  [1m[32mINSERT INTO "businesses" ("name", "tag", "score", "email", "password", "avator", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "商店"], ["tag", nil], ["score", nil], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 11:46:13.830003"], ["updated_at", "2024-10-19 11:46:13.830003"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 11:46:13.873809"], ["updated_at", "2024-10-19 11:46:13.873809"], ["preferable_type", "Business"], ["preferable_id", 4]]
+  ↳ app/controllers/business_controller.rb:8:in `block in register'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 4], ["preferable_type", "Business"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mTag Create (0.2ms)[0m  [1m[32mINSERT INTO "tags" ("tag1", "tag2", "tag3", "tag4", "tag5", "created_at", "updated_at", "business_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["tag1", nil], ["tag2", nil], ["tag3", nil], ["tag4", nil], ["tag5", nil], ["created_at", "2024-10-19 11:46:13.914826"], ["updated_at", "2024-10-19 11:46:13.914826"], ["business_id", 4]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mBusiness Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mBusiness Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["name", "商店"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mBusiness Update (0.1ms)[0m  [1m[33mUPDATE "businesses" SET "score" = ?, "avator" = ?, "updated_at" = ? WHERE "businesses"."id" = ?[0m  [["score", 10.0], ["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-19 11:46:13.928473"], ["id", 4]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/business_controller.rb:5:in `register'
+Completed 201 Created in 321ms (Views: 0.2ms | ActiveRecord: 6.2ms (10 queries, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 19:46:52 +0800
+Processing by CommodityController#register as */*
+  Parameters: {"name"=>"泡面", "price"=>4, "introduction"=>"泡面是一种便捷食品", "business_id"=>4, "commodity"=>{"name"=>"泡面", "price"=>4, "introduction"=>"泡面是一种便捷食品", "business_id"=>4}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:4:in `block in register'
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:7:in `block in register'
+  [1m[36mCommodity Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? LIMIT ?[0m  [["name", "泡面"], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:7:in `block in register'
+  [1m[36mCommodity Create (0.2ms)[0m  [1m[32mINSERT INTO "commodities" ("name", "price", "score", "introduction", "business_id", "homepage", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "泡面"], ["price", 4.0], ["score", 10.0], ["introduction", "泡面是一种便捷食品"], ["business_id", 4], ["homepage", "/path/to/default/homepage.html"], ["created_at", "2024-10-19 11:46:52.784974"], ["updated_at", "2024-10-19 11:46:52.784974"]]
+  ↳ app/controllers/commodity_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:3:in `register'
+Completed 201 Created in 45ms (Views: 0.2ms | ActiveRecord: 1.6ms (3 queries, 0 cached) | GC: 19.6ms)
+
+
+Started GET "/commodity/find/3" for 127.0.0.1 at 2024-10-19 19:47:04 +0800
+Processing by CommodityController#find_by_id as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mCommodity Load (0.2ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:22:in `find_by_id'
+Completed 200 OK in 5ms (Views: 0.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mPost Load (6.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/post/find/2" for 127.0.0.1 at 2024-10-19 19:51:54 +0800
+Processing by PostController#find_by_id as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:20:in `find_by_id'
+Completed 200 OK in 20ms (Views: 1.0ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/post/find/1" for 127.0.0.1 at 2024-10-19 19:52:02 +0800
+Processing by PostController#find_by_id as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:20:in `find_by_id'
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mComment Load (1.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/comment/find/1" for 127.0.0.1 at 2024-10-19 19:55:25 +0800
+Processing by CommentController#find_by_id as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comment_controller.rb:25:in `find_by_id'
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.5ms)
+
+
+  
+NameError (undefined local variable or method `ok' for an instance of CommentController):
+  
+app/controllers/comment_controller.rb:35:in `find_by_id'
+Started GET "/comment/find/1" for 127.0.0.1 at 2024-10-19 19:55:41 +0800
+Processing by CommentController#find_by_id as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comment_controller.rb:25:in `find_by_id'
+Completed 200 OK in 31ms (Views: 0.9ms | ActiveRecord: 2.4ms (1 query, 0 cached) | GC: 16.0ms)
+
+
+  [1m[36mAnnouncement Load (0.1ms)[0m  [1m[34mSELECT "announcements".* FROM "announcements" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/announcement/find/1" for 127.0.0.1 at 2024-10-19 19:58:12 +0800
+Processing by AnnouncementController#find_by_id as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mAnnouncement Load (0.1ms)[0m  [1m[34mSELECT "announcements".* FROM "announcements" WHERE "announcements"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/announcement_controller.rb:18:in `find_by_id'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/announcement/post" for 127.0.0.1 at 2024-10-19 20:00:49 +0800
+Processing by AnnouncementController#post as */*
+  Parameters: {"date"=>"2024-10-14", "content"=>"为什么没有日期?", "publisher"=>4, "announcement"=>{"date"=>"2024-10-14", "content"=>"为什么没有日期?", "publisher"=>4}}
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/announcement_controller.rb:5:in `post'
+Completed 200 OK in 10ms (Views: 0.5ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/announcement/post" for 127.0.0.1 at 2024-10-19 20:00:57 +0800
+Processing by AnnouncementController#post as */*
+  Parameters: {"date"=>"2024-10-14", "content"=>"为什么没有日期?", "publisher"=>3, "announcement"=>{"date"=>"2024-10-14", "content"=>"为什么没有日期?", "publisher"=>3}}
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/announcement_controller.rb:5:in `post'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+  [1m[36mAnnouncement Create (0.9ms)[0m  [1m[32mINSERT INTO "announcements" ("date", "content", "publisher", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["date", "2024-10-14"], ["content", "为什么没有日期?"], ["publisher", 3], ["created_at", "2024-10-19 12:00:57.572223"], ["updated_at", "2024-10-19 12:00:57.572223"]]
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+Completed 200 OK in 17ms (Views: 0.4ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.3ms)
+
+
+  [1m[36mAnnouncement Load (2.0ms)[0m  [1m[34mSELECT "announcements".* FROM "announcements" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mCommodity Load (0.2ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]

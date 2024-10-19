@@ -16,6 +16,22 @@ class PostController < ApplicationController
     end
   end
 
+  def find_by_id
+    post = Post.find_by(id: params[:id])
+    if post
+      render json: {
+        id: post.id,
+        publisher: post.publisher,
+        publisher_type: post.publisher_type,
+        date: post.date,
+        likes: post.likes,
+        content: post.content
+      }, status: :ok
+    else
+      render json: { errors: 'post not found' }, status: :not_found
+    end
+  end
+
   private
 
   def post_params

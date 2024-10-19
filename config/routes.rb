@@ -25,17 +25,21 @@ Rails.application.routes.draw do
   post '/business/login' => 'business#login', as: :business_login
   get '/business/find/:id' => 'business#find_by_id', as: :business_find_by_id
 
-  # Business
+  # Commodity
   post '/commodity/register' => 'commodity#register', as: :commodity_register
+  get '/commodity/find/:id' => 'commodity#find_by_id', as: :commodity_find_by_id
 
   # Post
   post '/post/post' => 'post#post', as: :post_post
+  get '/post/find/:id' => 'post#find_by_id', as: :post_find_by_id
 
   # Comment
   post '/comment/post' => 'comment#post', as: :comment_post
+  get '/comment/find/:id' => 'comment#find_by_id', as: :comment_find_by_id
 
   # Announcement
   post '/announcement/post' => 'announcement#post', as: :announcement_post
+  get '/announcement/find/:id' => 'announcement#find_by_id', as: :announcement_find_by_id
 
   # Defines the root path route ("/")
   # root "posts#index"
