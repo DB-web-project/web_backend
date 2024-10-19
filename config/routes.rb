@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/user/find/:id' => 'user#find_by_id', as: :user_find_by_id
   delete '/user/delete/:id' => 'user#delete_by_id', as: :user_delete_by_id
   put '/user/update/:id' => 'user#update_by_id', as: :user_update_by_id
+  put '/user/preference/:id' => 'user#update_preference_by_id', as: :user_update_preference_by_id
 
   # Admin
   post '/admin/register' => 'admin#register', as: :admin_register
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
   get '/admin/find/:id' => 'admin#find_by_id', as: :admin_find_by_id
   delete '/admin/delete/:id' => 'admin#delete_by_id', as: :admin_delete_by_id
   put '/admin/update/:id' => 'admin#update_by_id', as: :admin_update_by_id
+  put '/admin/preference/:id' => 'admin#update_preference_by_id', as: :admin_update_preference_by_id
 
   # Business
   post '/business/register' => 'business#register', as: :business_register
@@ -30,6 +32,8 @@ Rails.application.routes.draw do
   get '/business/find/:id' => 'business#find_by_id', as: :business_find_by_id
   delete '/business/delete/:id' => 'business#delete_by_id', as: :business_delete_by_id
   put '/business/update/:id' => 'business#update_by_id', as: :business_update_by_id
+  put '/business/preference/:id' => 'business#update_preference_by_id', as: :business_update_preference_by_id
+  put '/business/tag/:id' => 'business#update_tag_by_id', as: :business_update_tag_by_id
 
   # Commodity
   post '/commodity/register' => 'commodity#register', as: :commodity_register

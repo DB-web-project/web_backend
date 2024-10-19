@@ -1,5 +1,5 @@
 class BusinessController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: %i[register login]
+  skip_before_action :verify_authenticity_token, only: %i[register login update_by_id update_preference_by_id] # Disable CSRF protection for these actions
 
   def register
     ActiveRecord::Base.transaction do
@@ -92,6 +92,35 @@ class BusinessController < ApplicationController
     end
   end
 
+  def update_preference_by_id
+    preference = Preference.find_by(preferable_type: 'Business', preferable_id: params[:id])
+    if preference
+      preference.update(update_preference_by_id_params)
+      render json: {
+        message: 'Preference updated'
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Preference not found'
+      }, status: :not_found
+    end
+  end
+
+  def update_tag_by_id
+    tag = Tag.find_by(business_id: params[:id]) # tag belongs to business, so use business_id to find tag
+    puts
+    if tag
+      tag.update(update_tag_by_id_params)
+      render json: {
+        message: 'Tag updated'
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Tag not found'
+      }, status: :not_found
+    end
+  end
+
   private
 
   def extract_preferences(preference)
@@ -117,5 +146,27 @@ class BusinessController < ApplicationController
       email: params[:email],
       password: params[:password]
     }
+  end
+
+  def update_preference_by_id_params
+    preferences_array = params[:preferences]
+    {
+      preference1: preferences_array[0],
+      preference2: preferences_array[1],
+      preference3: preferences_array[2],
+      preference4: preferences_array[3],
+      preference5: preferences_array[4]
+    }.compact
+  end
+
+  def update_tag_by_id_params
+    tags_array = params[:tags]
+    {
+      tag1: tags_array[0],
+      tag2: tags_array[1],
+      tag3: tags_array[2],
+      tag4: tags_array[3],
+      tag5: tags_array[4]
+    }.compact
   end
 end

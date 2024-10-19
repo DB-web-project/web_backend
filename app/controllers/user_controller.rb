@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: %i[register login] # Disable CSRF protection for these actions
+  skip_before_action :verify_authenticity_token, only: %i[register login update_by_id update_preference_by_id] # Disable CSRF protection for these actions
 
   def register
     ActiveRecord::Base.transaction do
@@ -83,6 +83,20 @@ class UserController < ApplicationController
     end
   end
 
+  def update_preference_by_id # by user id
+    preference = Preference.find_by(preferable_type: 'User', preferable_id: params[:id])
+    if preference
+      preference.update(update_preference_by_id_params)
+      render json: {
+        message: 'Preference updated'
+      }, status: :ok # 200
+    else
+      render json: {
+        errors: 'User not found'
+      }, status: :not_found # 404
+    end
+  end
+
   private
 
   def extract_preferences(preference)
@@ -100,5 +114,16 @@ class UserController < ApplicationController
       email: params[:email],
       password: params[:password]
     }
+  end
+
+  def update_preference_by_id_params
+    preferences_array = params[:preferences]
+    {
+      preference1: preferences_array[0],
+      preference2: preferences_array[1],
+      preference3: preferences_array[2],
+      preference4: preferences_array[3],
+      preference5: preferences_array[4]
+    }.compact
   end
 end

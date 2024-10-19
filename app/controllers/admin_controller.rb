@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: %i[register login]
+  skip_before_action :verify_authenticity_token, only: %i[register login update_by_id update_preference_by_id] # Disable CSRF protection for these actions
 
   def register
     ActiveRecord::Base.transaction do
@@ -83,6 +83,20 @@ class AdminController < ApplicationController
     end
   end
 
+  def update_preference_by_id
+    perference = Preference.find_by(preferable_type: 'Admin', preferable_id: params[:id])
+    if perference
+      perference.update(update_preference_by_id_params)
+      render json: {
+        message: 'Preference updated'
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Preference not found'
+      }, status: :not_found
+    end
+  end
+
   private
 
   def extract_preferences(preference)
@@ -100,5 +114,16 @@ class AdminController < ApplicationController
       email: params[:email],
       password: params[:password]
     }
+  end
+
+  def update_preference_by_id_params
+    preferences_array = params[:preferences]
+    {
+      preference1: preferences_array[0],
+      preference2: preferences_array[1],
+      preference3: preferences_array[2],
+      preference4: preferences_array[3],
+      preference5: preferences_array[4]
+    }.compact
   end
 end
