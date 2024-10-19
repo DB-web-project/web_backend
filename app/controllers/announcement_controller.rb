@@ -28,6 +28,16 @@ class AnnouncementController < ApplicationController
     end
   end
 
+  def delete_by_id
+    announcement = Announcement.find_by(id: params[:id])
+    if announcement
+      announcement.destroy
+      render json: { message: 'Announcement deleted' }
+    else
+      render json: { error: 'Announcement not found' }, status: :not_found
+    end
+  end
+
   private
 
   def announcement_params

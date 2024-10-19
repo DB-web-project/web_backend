@@ -64,6 +64,20 @@ class BusinessController < ApplicationController
     end
   end
 
+  def delete_by_id
+    business = Business.find_by(id: params[:id])
+    if business
+      business.destroy
+      render json: {
+        message: 'Business deleted successfully'
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Business not found'
+      }, status: :not_found
+    end
+  end
+
   private
 
   def extract_preferences(preference)

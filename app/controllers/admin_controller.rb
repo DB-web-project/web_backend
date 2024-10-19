@@ -55,6 +55,20 @@ class AdminController < ApplicationController
     end
   end
 
+  def delete_by_id
+    admin = Admin.find_by(id: params[:id])
+    if admin
+      admin.destroy
+      render json: {
+        message: 'Admin deleted successfully'
+      }, status: :ok
+    else
+      render json: {
+        error: 'Admin not found'
+      }, status: :not_found
+    end
+  end
+
   private
 
   def extract_preferences(preference)

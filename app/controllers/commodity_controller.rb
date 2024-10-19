@@ -37,6 +37,20 @@ class CommodityController < ApplicationController
     end
   end
 
+  def delete_by_id
+    commodity = Commodity.find_by(id: params[:id])
+    if commodity
+      commodity.destroy
+      render json: {
+        message: 'Commodity deleted'
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Commodity not found'
+      }, status: :not_found
+    end
+  end
+
   private
 
   def commodity_params

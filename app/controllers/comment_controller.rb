@@ -38,6 +38,16 @@ class CommentController < ApplicationController
     end
   end
 
+  def delete_by_id
+    comment = Comment.find_by_id(params[:id])
+    if comment
+      comment.destroy
+      render json: { message: 'Comment deleted' }, status: :ok
+    else
+      render json: { error: 'Comment not found' }, status: :not_found
+    end
+  end
+
   private
 
   def comment_params

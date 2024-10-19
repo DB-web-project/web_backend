@@ -55,6 +55,20 @@ class UserController < ApplicationController
     end
   end
 
+  def delete_by_id
+    user = User.find_by(id: params[:id])
+    if user
+      user.destroy
+      render json: {
+        message: 'User deleted'
+      }, status: :ok # 200
+    else
+      render json: {
+        error: 'User not found'
+      }, status: :not_found
+    end
+  end
+
   private
 
   def extract_preferences(preference)
