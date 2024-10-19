@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   # Admin
   post '/admin/register' => 'admin#register', as: :admin_register
+  post '/admin/login' => 'admin#login', as: :admin_login
 
   # Business
   post '/business/register' => 'business#register', as: :business_register

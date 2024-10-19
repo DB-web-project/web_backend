@@ -2294,3 +2294,166 @@ Processing by UserController#login as */*
 Completed 200 OK in 239ms (Views: 0.2ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
 
 
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mAdmin Load (0.5ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mAdmin Delete All (9.9ms)[0m  [1m[31mDELETE FROM "admins"[0m
+Started POST "/admin/register" for 127.0.0.1 at 2024-10-19 15:32:40 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"石通", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"石通", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:4:in `block in register'
+  [1m[36mAdmin Exists? (3.4ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "石通"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Create (0.3ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "password", "avator", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "石通"], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 07:32:41.280950"], ["updated_at", "2024-10-19 07:32:41.280950"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 07:32:41.311037"], ["updated_at", "2024-10-19 07:32:41.311037"], ["preferable_type", "Admin"], ["preferable_id", 2]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (1.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 2], ["preferable_type", "Admin"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mAdmin Update (0.1ms)[0m  [1m[33mUPDATE "admins" SET "avator" = ?, "updated_at" = ? WHERE "admins"."id" = ?[0m  [["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-19 07:32:41.344868"], ["id", 2]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 201 Created in 328ms (Views: 0.4ms | ActiveRecord: 15.1ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mAdmin Load (0.2ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:36:58 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/home/dqr/db_web/web_backend/app/controllers/admin_controller.rb:51: syntax error, unexpected end-of-input, expecting `end' or dummy end):
+  
+app/controllers/admin_controller.rb:51: syntax error, unexpected end-of-input, expecting `end' or dummy end
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:38:24 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"石通", "password"=>"[FILTERED]", "admin"=>{"name"=>"石通", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAdmin Load (0.2ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:22:in `login'
+Completed 404 Not Found in 13ms (Views: 0.4ms | ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:38:44 +0800
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"石通", "password"=>"[FILTERED]", "admin"=>{"name"=>"石通", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAdmin Load (0.5ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:22:in `login'
+Completed 404 Not Found in 4ms (Views: 0.2ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/register" for 127.0.0.1 at 2024-10-19 15:40:27 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"石通", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"石通", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:4:in `block in register'
+  [1m[36mAdmin Exists? (3.3ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "石通"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 400 Bad Request in 249ms (Views: 0.4ms | ActiveRecord: 10.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/register" for 127.0.0.1 at 2024-10-19 15:40:57 +0800
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"高悠然", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"高悠然", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "高悠然"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mAdmin Create (0.8ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "password", "avator", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "高悠然"], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 07:40:57.537010"], ["updated_at", "2024-10-19 07:40:57.537010"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/admin_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 07:40:57.593742"], ["updated_at", "2024-10-19 07:40:57.593742"], ["preferable_type", "Admin"], ["preferable_id", 3]]
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (1.5ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 3], ["preferable_type", "Admin"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mAdmin Update (1.7ms)[0m  [1m[33mUPDATE "admins" SET "avator" = ?, "updated_at" = ? WHERE "admins"."id" = ?[0m  [["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-19 07:40:57.618193"], ["id", 3]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:3:in `register'
+Completed 201 Created in 345ms (Views: 0.3ms | ActiveRecord: 7.4ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:41:28 +0800
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"高悠然", "password"=>"[FILTERED]", "admin"=>{"name"=>"高悠然", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAdmin Load (0.6ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:22:in `login'
+Completed 404 Not Found in 10ms (Views: 0.2ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:41:55 +0800
+  
+ArgumentError (Before process_action callback :authenticate_request has not been defined):
+  
+app/controllers/admin_controller.rb:2:in `<class:AdminController>'
+app/controllers/admin_controller.rb:1:in `<main>'
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:42:44 +0800
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"高悠然", "password"=>"[FILTERED]", "admin"=>{"name"=>"高悠然", "password"=>"[FILTERED]"}}
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:24:in `login'
+Completed 404 Not Found in 7ms (Views: 0.3ms | ActiveRecord: 3.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:43:12 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"高悠然", "password"=>"[FILTERED]", "admin"=>{"name"=>"高悠然", "password"=>"[FILTERED]"}}
+  [1m[36mAdmin Load (0.2ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:24:in `login'
+Completed 404 Not Found in 14ms (Views: 0.3ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:44:07 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"高悠然", "password"=>"[FILTERED]", "admin"=>{"name"=>"高悠然", "password"=>"[FILTERED]"}}
+  [1m[36mAdmin Load (0.2ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "高悠然"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:24:in `login'
+  [1m[36mPreference Load (3.9ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Admin"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:26:in `login'
+Completed 200 OK in 258ms (Views: 0.5ms | ActiveRecord: 7.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:44:24 +0800
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"高悠然", "password"=>"[FILTERED]", "admin"=>{"name"=>"高悠然", "password"=>"[FILTERED]"}}
+  [1m[36mAdmin Load (0.3ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "高悠然"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:24:in `login'
+  [1m[36mPreference Load (0.4ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Admin"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:26:in `login'
+Completed 200 OK in 278ms (Views: 0.3ms | ActiveRecord: 5.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:44:34 +0800
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"石通", "password"=>"[FILTERED]", "admin"=>{"name"=>"石通", "password"=>"[FILTERED]"}}
+  [1m[36mAdmin Load (0.4ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "石通"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:24:in `login'
+Completed 404 Not Found in 236ms (Views: 0.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2024-10-19 15:44:44 +0800
+Processing by AdminController#login as */*
+  Parameters: {"name"=>"石通", "password"=>"[FILTERED]", "admin"=>{"name"=>"石通", "password"=>"[FILTERED]"}}
+  [1m[36mAdmin Load (0.5ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "石通"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:24:in `login'
+  [1m[36mPreference Load (1.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Admin"], ["preferable_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:26:in `login'
+Completed 200 OK in 236ms (Views: 0.5ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
