@@ -1986,3 +1986,65 @@ Can't verify CSRF token authenticity.
 Completed 400 Bad Request in 15ms (Views: 0.2ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.5ms)
 
 
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddForeignKeyToCommodities (20241019064917)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acommodities" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "price" float, "score" float, "introduction" varchar, "business_id" integer, "homepage" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "acommodities" ("id","name","price","score","introduction","business_id","homepage","created_at","updated_at")
+                     SELECT "id","name","price","score","introduction","business_id","homepage","created_at","updated_at" FROM "commodities"[0m
+  [1m[35m (1.6ms)[0m  [1m[35mDROP TABLE "commodities"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "commodities" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "price" float, "score" float, "introduction" varchar, "business_id" integer, "homepage" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a37727cac7"
+FOREIGN KEY ("business_id")
+  REFERENCES "businesses" ("id")
+)[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "commodities" ("id","name","price","score","introduction","business_id","homepage","created_at","updated_at")
+                     SELECT "id","name","price","score","introduction","business_id","homepage","created_at","updated_at" FROM "acommodities"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "acommodities"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_commodities_on_business_id" ON "commodities" ("business_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241019064917') RETURNING "version"[0m
+  [1m[36mTRANSACTION (11.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 14:58:25 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CommodityController#register as */*
+  Parameters: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1, "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:4:in `block in register'
+  [1m[36mBusiness Load (2.2ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mCommodity Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? LIMIT ?[0m  [["name", "黄桃罐头"], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mCommodity Create (0.6ms)[0m  [1m[32mINSERT INTO "commodities" ("name", "price", "score", "introduction", "business_id", "homepage", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "黄桃罐头"], ["price", 26.0], ["score", nil], ["introduction", "黄桃罐头是一种水果罐头"], ["business_id", 1], ["homepage", nil], ["created_at", "2024-10-19 06:58:25.814185"], ["updated_at", "2024-10-19 06:58:25.814185"]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:3:in `register'
+Completed 201 Created in 105ms (Views: 0.4ms | ActiveRecord: 16.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 14:58:39 +0800
+Processing by CommodityController#register as */*
+  Parameters: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1, "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mBusiness Load (4.8ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mCommodity Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? LIMIT ?[0m  [["name", "黄桃罐头"], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:3:in `register'
+Completed 400 Bad Request in 42ms (Views: 0.3ms | ActiveRecord: 7.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mCommodity Load (1.8ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
