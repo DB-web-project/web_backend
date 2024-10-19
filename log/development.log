@@ -1826,3 +1826,163 @@ Completed 201 Created in 164ms (Views: 0.3ms | ActiveRecord: 6.2ms (8 queries, 0
 
 
   [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mTag Load (2.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddBusinessIdToTags (20241019062943)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atags" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "tag1" varchar, "tag2" varchar, "tag3" varchar, "tag4" varchar, "tag5" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "atags" ("id","tag1","tag2","tag3","tag4","tag5","created_at","updated_at")
+                     SELECT "id","tag1","tag2","tag3","tag4","tag5","created_at","updated_at" FROM "tags"[0m
+  [1m[35m (1.6ms)[0m  [1m[35mDROP TABLE "tags"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "tags" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "tag1" varchar, "tag2" varchar, "tag3" varchar, "tag4" varchar, "tag5" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "business_id" integer NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "tags" ("id","tag1","tag2","tag3","tag4","tag5","created_at","updated_at")
+                     SELECT "id","tag1","tag2","tag3","tag4","tag5","created_at","updated_at" FROM "atags"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atags"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atags" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "tag1" varchar, "tag2" varchar, "tag3" varchar, "tag4" varchar, "tag5" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "business_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "atags" ("id","tag1","tag2","tag3","tag4","tag5","created_at","updated_at","business_id")
+                     SELECT "id","tag1","tag2","tag3","tag4","tag5","created_at","updated_at","business_id" FROM "tags"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "tags"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "tags" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "tag1" varchar, "tag2" varchar, "tag3" varchar, "tag4" varchar, "tag5" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "business_id" integer NOT NULL, CONSTRAINT "fk_rails_f625c93d35"
+FOREIGN KEY ("business_id")
+  REFERENCES "businesses" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "tags" ("id","tag1","tag2","tag3","tag4","tag5","created_at","updated_at","business_id")
+                     SELECT "id","tag1","tag2","tag3","tag4","tag5","created_at","updated_at","business_id" FROM "atags"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atags"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_tags_on_business_id" ON "tags" ("business_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241019062943') RETURNING "version"[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/business/register" for 127.0.0.1 at 2024-10-19 14:35:13 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BusinessController#register as */*
+  Parameters: {"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:4:in `block in register'
+  [1m[36mBusiness Exists? (4.0ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mBusiness Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mBusiness Create (0.3ms)[0m  [1m[32mINSERT INTO "businesses" ("name", "tag", "score", "email", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "麻辣烫"], ["tag", nil], ["score", nil], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 06:35:13.733280"], ["updated_at", "2024-10-19 06:35:13.733280"]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 06:35:13.765776"], ["updated_at", "2024-10-19 06:35:13.765776"], ["preferable_type", "Business"], ["preferable_id", 1]]
+  ↳ app/controllers/business_controller.rb:6:in `block in register'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/business_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 122ms (ActiveRecord: 11.9ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'preferable' for Tag.):
+
+Causes:
+NoMethodError (undefined method `preferable=' for an instance of Tag)
+  
+app/controllers/business_controller.rb:7:in `block in register'
+app/controllers/business_controller.rb:3:in `register'
+Started POST "/business/register" for 127.0.0.1 at 2024-10-19 14:36:04 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BusinessController#register as */*
+  Parameters: {"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:4:in `block in register'
+  [1m[36mBusiness Exists? (3.8ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mBusiness Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mBusiness Create (0.2ms)[0m  [1m[32mINSERT INTO "businesses" ("name", "tag", "score", "email", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "麻辣烫"], ["tag", nil], ["score", nil], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 06:36:04.529231"], ["updated_at", "2024-10-19 06:36:04.529231"]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 06:36:04.562769"], ["updated_at", "2024-10-19 06:36:04.562769"], ["preferable_type", "Business"], ["preferable_id", 1]]
+  ↳ app/controllers/business_controller.rb:6:in `block in register'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/business_controller.rb:3:in `register'
+Completed 500 Internal Server Error in 132ms (ActiveRecord: 12.9ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'preference' for Business.):
+
+Causes:
+NoMethodError (undefined method `preference=' for an instance of Business)
+  
+app/controllers/business_controller.rb:8:in `block in register'
+app/controllers/business_controller.rb:3:in `register'
+Started POST "/business/register" for 127.0.0.1 at 2024-10-19 14:40:22 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BusinessController#register as */*
+  Parameters: {"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:4:in `block in register'
+  [1m[36mBusiness Exists? (3.6ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mBusiness Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mBusiness Create (0.3ms)[0m  [1m[32mINSERT INTO "businesses" ("name", "tag", "score", "email", "password", "avator", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "麻辣烫"], ["tag", nil], ["score", nil], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 06:40:22.803548"], ["updated_at", "2024-10-19 06:40:22.803548"]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 06:40:22.836374"], ["updated_at", "2024-10-19 06:40:22.836374"], ["preferable_type", "Business"], ["preferable_id", 1]]
+  ↳ app/controllers/business_controller.rb:6:in `block in register'
+  [1m[36mPreference Load (1.6ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 1], ["preferable_type", "Business"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:8:in `block in register'
+  [1m[36mTag Load (0.6ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:8:in `block in register'
+  [1m[36mTag Create (0.5ms)[0m  [1m[32mINSERT INTO "tags" ("tag1", "tag2", "tag3", "tag4", "tag5", "created_at", "updated_at", "business_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["tag1", nil], ["tag2", nil], ["tag3", nil], ["tag4", nil], ["tag5", nil], ["created_at", "2024-10-19 06:40:22.910144"], ["updated_at", "2024-10-19 06:40:22.910144"], ["business_id", 1]]
+  ↳ app/controllers/business_controller.rb:8:in `block in register'
+  [1m[36mBusiness Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:8:in `block in register'
+  [1m[36mBusiness Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["name", "麻辣烫"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:8:in `block in register'
+  [1m[36mBusiness Update (2.7ms)[0m  [1m[33mUPDATE "businesses" SET "avator" = ?, "updated_at" = ? WHERE "businesses"."id" = ?[0m  [["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-19 06:40:22.947569"], ["id", 1]]
+  ↳ app/controllers/business_controller.rb:8:in `block in register'
+  [1m[36mTRANSACTION (13.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/business_controller.rb:3:in `register'
+Completed 201 Created in 273ms (Views: 0.7ms | ActiveRecord: 27.5ms (10 queries, 0 cached) | GC: 31.3ms)
+
+
+  [1m[36mTag Load (3.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mBusiness Load (0.4ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/business/register" for 127.0.0.1 at 2024-10-19 14:41:38 +0800
+Processing by BusinessController#register as */*
+  Parameters: {"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mBusiness Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mBusiness Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/business_controller.rb:3:in `register'
+Completed 400 Bad Request in 26ms (Views: 0.2ms | ActiveRecord: 3.0ms (2 queries, 0 cached) | GC: 1.0ms)
+
+
+Started POST "/business/register" for 127.0.0.1 at 2024-10-19 14:41:48 +0800
+Processing by BusinessController#register as */*
+  Parameters: {"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "business"=>{"name"=>"麻辣烫", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mBusiness Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mBusiness Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "麻辣烫"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:5:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/business_controller.rb:3:in `register'
+Completed 400 Bad Request in 15ms (Views: 0.2ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.5ms)
+
+
