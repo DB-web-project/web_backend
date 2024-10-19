@@ -1,5 +1,7 @@
 class UserController < ApplicationController
   def register
+    logger.info "Received params: #{params.inspect}"
+
     ActiveRecord::Base.transaction do
       user = User.new(user_params)
       if user.save
@@ -21,6 +23,10 @@ class UserController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    {
+      name: params[:name],
+      email: params[:email],
+      password: params[:password]
+    }
   end
 end
