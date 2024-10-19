@@ -2844,3 +2844,270 @@ Processing by BusinessController#find_by_id as */*
 Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.2ms (3 queries, 0 cached) | GC: 0.0ms)
 
 
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:07:37 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅", "post"=>{"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅"}}
+Can't verify CSRF token authenticity.
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 1.8ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'publisher_id' for Post.):
+
+Causes:
+NoMethodError (undefined method `publisher_id=' for an instance of Post)
+  
+app/controllers/post_controller.rb:3:in `post'
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:09:06 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅", "post"=>{"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/post_controller.rb:4:in `post'
+  [1m[36mPost Create (4.1ms)[0m  [1m[32mINSERT INTO "posts" ("publisher", "publisher_type", "date", "likes", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["publisher", nil], ["publisher_type", "User"], ["date", "2025-03-31"], ["likes", 0], ["content", "无人扶我青云志, 我自踏雪至山巅"], ["created_at", "2024-10-19 09:09:06.824533"], ["updated_at", "2024-10-19 09:09:06.824533"]]
+  ↳ app/controllers/post_controller.rb:4:in `post'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/post_controller.rb:4:in `post'
+Completed 201 Created in 47ms (Views: 0.9ms | ActiveRecord: 19.5ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:12:33 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>4, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅", "post"=>{"publisher"=>4, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅"}}
+Can't verify CSRF token authenticity.
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:3:in `post'
+Completed 404 Not Found in 31ms (Views: 0.2ms | ActiveRecord: 3.5ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:12:41 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>4, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅", "post"=>{"publisher"=>4, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅"}}
+Can't verify CSRF token authenticity.
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:3:in `post'
+Completed 404 Not Found in 7ms (Views: 0.4ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:12:51 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>4, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅", "post"=>{"publisher"=>4, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅"}}
+Can't verify CSRF token authenticity.
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:3:in `post'
+Completed 404 Not Found in 23ms (Views: 0.2ms | ActiveRecord: 2.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:13:21 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>2, "publisher_type"=>"Admin", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅", "post"=>{"publisher"=>2, "publisher_type"=>"Admin", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:4:in `post'
+Completed 404 Not Found in 30ms (Views: 0.2ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mAdmin Load (1.9ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:14:34 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>2, "publisher_type"=>"Admin", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅", "post"=>{"publisher"=>2, "publisher_type"=>"Admin", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAdmin Load (0.0ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:4:in `post'
+Completed 404 Not Found in 4ms (Views: 0.1ms | ActiveRecord: 0.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:14:47 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>1, "publisher_type"=>"Admin", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅", "post"=>{"publisher"=>1, "publisher_type"=>"Admin", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:4:in `post'
+Completed 404 Not Found in 4ms (Views: 0.3ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:14:51 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>3, "publisher_type"=>"Admin", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅", "post"=>{"publisher"=>3, "publisher_type"=>"Admin", "date"=>"2025-03-31", "content"=>"无人扶我青云志, 我自踏雪至山巅"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAdmin Load (0.7ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:4:in `post'
+Completed 404 Not Found in 3ms (Views: 0.8ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:15:16 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝", "post"=>{"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝"}}
+Can't verify CSRF token authenticity.
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:3:in `post'
+Completed 404 Not Found in 3ms (Views: 0.3ms | ActiveRecord: 0.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:16:22 +0800
+  
+NameError (undefined local variable or method `i' for class PostController):
+  
+app/controllers/post_controller.rb:2:in `<class:PostController>'
+app/controllers/post_controller.rb:1:in `<main>'
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:16:53 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝", "post"=>{"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:5:in `post'
+Completed 404 Not Found in 13ms (Views: 0.5ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:17:18 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝", "post"=>{"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:5:in `post'
+Completed 404 Not Found in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:19:28 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝", "post"=>{"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝"}}
+Can't verify CSRF token authenticity.
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:3:in `post'
+Completed 404 Not Found in 28ms (Views: 0.4ms | ActiveRecord: 2.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:20:05 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝", "post"=>{"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝"}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:4:in `post'
+Completed 404 Not Found in 29ms (Views: 0.4ms | ActiveRecord: 7.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:22:19 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝", "post"=>{"publisher"=>3, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:4:in `post'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/post_controller.rb:9:in `post'
+  [1m[36mPost Create (2.3ms)[0m  [1m[32mINSERT INTO "posts" ("publisher", "publisher_type", "date", "likes", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["publisher", 3], ["publisher_type", "User"], ["date", "2025-03-31"], ["likes", 0], ["content", "听泉鉴宝"], ["created_at", "2024-10-19 09:22:19.348910"], ["updated_at", "2024-10-19 09:22:19.348910"]]
+  ↳ app/controllers/post_controller.rb:9:in `post'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/post_controller.rb:9:in `post'
+Completed 201 Created in 110ms (Views: 0.2ms | ActiveRecord: 12.0ms (2 queries, 0 cached) | GC: 28.9ms)
+
+
+  [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT "posts".* FROM "posts" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:22:56 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>4, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝", "post"=>{"publisher"=>4, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:4:in `post'
+Completed 404 Not Found in 19ms (Views: 0.2ms | ActiveRecord: 2.9ms (1 query, 0 cached) | GC: 0.1ms)
+
+
+Started POST "/post/post" for 127.0.0.1 at 2024-10-19 17:23:00 +0800
+Processing by PostController#post as */*
+  Parameters: {"publisher"=>4, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝", "post"=>{"publisher"=>4, "publisher_type"=>"User", "date"=>"2025-03-31", "content"=>"听泉鉴宝"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/post_controller.rb:4:in `post'
+Completed 404 Not Found in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/comment/post" for 127.0.0.1 at 2024-10-19 17:31:19 +0800
+Processing by CommentController#post as */*
+  Parameters: {"post_id"=>2, "publisher"=>3, "publisher_type"=>"User", "date"=>"2024-04-12", "content"=>"潘宏爱玩狗", "comment"=>{"post_id"=>2, "publisher"=>3, "publisher_type"=>"User", "date"=>"2024-04-12", "content"=>"潘宏爱玩狗"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/comment_controller.rb:5:in `post'
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/comment_controller.rb:8:in `post'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/comment_controller.rb:11:in `post'
+  [1m[36mComment Create (2.2ms)[0m  [1m[32mINSERT INTO "comments" ("post_id", "publisher", "publisher_type", "date", "content", "likes", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["post_id", 2], ["publisher", 3], ["publisher_type", "User"], ["date", "2024-04-12"], ["content", "潘宏爱玩狗"], ["likes", 0], ["created_at", "2024-10-19 09:31:19.767831"], ["updated_at", "2024-10-19 09:31:19.767831"]]
+  ↳ app/controllers/comment_controller.rb:11:in `post'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/comment_controller.rb:11:in `post'
+Completed 200 OK in 45ms (Views: 0.3ms | ActiveRecord: 3.8ms (3 queries, 0 cached) | GC: 1.2ms)
+
+
+Started POST "/comment/post" for 127.0.0.1 at 2024-10-19 17:31:30 +0800
+Processing by CommentController#post as */*
+  Parameters: {"post_id"=>3, "publisher"=>3, "publisher_type"=>"User", "date"=>"2024-04-12", "content"=>"潘宏爱玩狗", "comment"=>{"post_id"=>3, "publisher"=>3, "publisher_type"=>"User", "date"=>"2024-04-12", "content"=>"潘宏爱玩狗"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/comment_controller.rb:5:in `post'
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/comment_controller.rb:8:in `post'
+Completed 404 Not Found in 9ms (Views: 0.2ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/comment/post" for 127.0.0.1 at 2024-10-19 17:31:39 +0800
+Processing by CommentController#post as */*
+  Parameters: {"post_id"=>3, "publisher"=>6, "publisher_type"=>"User", "date"=>"2024-04-12", "content"=>"潘宏爱玩狗", "comment"=>{"post_id"=>3, "publisher"=>6, "publisher_type"=>"User", "date"=>"2024-04-12", "content"=>"潘宏爱玩狗"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/comment_controller.rb:5:in `post'
+Completed 404 Not Found in 3ms (Views: 0.4ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mAnnouncement Load (0.5ms)[0m  [1m[34mSELECT "announcements".* FROM "announcements" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/announcement/post" for 127.0.0.1 at 2024-10-19 17:38:15 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AnnouncementController#post as */*
+  Parameters: {"date"=>"2024-10-14", "content"=>"杜启嵘是真强", "publisher"=>2, "announcement"=>{"date"=>"2024-10-14", "content"=>"杜启嵘是真强", "publisher"=>2}}
+  [1m[36mAdmin Load (0.6ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/announcement_controller.rb:5:in `post'
+[31mUnpermitted parameter: :date. Context: { controller: AnnouncementController, action: post, request: #<ActionDispatch::Request:0x0000706865dad520>, params: {"date"=>"2024-10-14", "content"=>"杜启嵘是真强", "publisher"=>2, "controller"=>"announcement", "action"=>"post", "announcement"=>{"date"=>"2024-10-14", "content"=>"杜启嵘是真强", "publisher"=>2}} }[0m
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+  [1m[36mAnnouncement Create (4.4ms)[0m  [1m[32mINSERT INTO "announcements" ("date", "content", "publisher", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["date", nil], ["content", "杜启嵘是真强"], ["publisher", 2], ["created_at", "2024-10-19 09:38:15.749354"], ["updated_at", "2024-10-19 09:38:15.749354"]]
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+Completed 200 OK in 87ms (Views: 0.4ms | ActiveRecord: 13.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/announcement/post" for 127.0.0.1 at 2024-10-19 17:38:45 +0800
+Processing by AnnouncementController#post as */*
+  Parameters: {"date"=>"2024-10-14", "content"=>"石通是真强", "publisher"=>2, "announcement"=>{"date"=>"2024-10-14", "content"=>"石通是真强", "publisher"=>2}}
+  [1m[36mAdmin Load (1.5ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/announcement_controller.rb:5:in `post'
+[31mUnpermitted parameter: :date. Context: { controller: AnnouncementController, action: post, request: #<ActionDispatch::Request:0x00007068643d24e8>, params: {"date"=>"2024-10-14", "content"=>"石通是真强", "publisher"=>2, "controller"=>"announcement", "action"=>"post", "announcement"=>{"date"=>"2024-10-14", "content"=>"石通是真强", "publisher"=>2}} }[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+  [1m[36mAnnouncement Create (4.7ms)[0m  [1m[32mINSERT INTO "announcements" ("date", "content", "publisher", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["date", nil], ["content", "石通是真强"], ["publisher", 2], ["created_at", "2024-10-19 09:38:45.703647"], ["updated_at", "2024-10-19 09:38:45.703647"]]
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+Completed 200 OK in 86ms (Views: 1.2ms | ActiveRecord: 7.4ms (2 queries, 0 cached) | GC: 32.6ms)
+
+
+Started POST "/announcement/post" for 127.0.0.1 at 2024-10-19 17:39:01 +0800
+Processing by AnnouncementController#post as */*
+  Parameters: {"date"=>"2024-10-14", "content"=>"高悠然是真强", "publisher"=>3, "announcement"=>{"date"=>"2024-10-14", "content"=>"高悠然是真强", "publisher"=>3}}
+  [1m[36mAdmin Load (0.8ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/announcement_controller.rb:5:in `post'
+[31mUnpermitted parameter: :date. Context: { controller: AnnouncementController, action: post, request: #<ActionDispatch::Request:0x0000706864404560>, params: {"date"=>"2024-10-14", "content"=>"高悠然是真强", "publisher"=>3, "controller"=>"announcement", "action"=>"post", "announcement"=>{"date"=>"2024-10-14", "content"=>"高悠然是真强", "publisher"=>3}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+  [1m[36mAnnouncement Create (1.9ms)[0m  [1m[32mINSERT INTO "announcements" ("date", "content", "publisher", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["date", nil], ["content", "高悠然是真强"], ["publisher", 3], ["created_at", "2024-10-19 09:39:01.222632"], ["updated_at", "2024-10-19 09:39:01.222632"]]
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/announcement_controller.rb:7:in `post'
+Completed 200 OK in 29ms (Views: 0.3ms | ActiveRecord: 2.8ms (2 queries, 0 cached) | GC: 1.2ms)
+
+
+Started POST "/announcement/post" for 127.0.0.1 at 2024-10-19 17:39:06 +0800
+Processing by AnnouncementController#post as */*
+  Parameters: {"date"=>"2024-10-14", "content"=>"高悠然是真强", "publisher"=>4, "announcement"=>{"date"=>"2024-10-14", "content"=>"高悠然是真强", "publisher"=>4}}
+  [1m[36mAdmin Load (0.3ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/announcement_controller.rb:5:in `post'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mAnnouncement Load (0.1ms)[0m  [1m[34mSELECT "announcements".* FROM "announcements" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]

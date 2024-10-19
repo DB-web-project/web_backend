@@ -1,2 +1,29 @@
 class CommentController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:post]
+
+  def post
+    if (params[:publisher_type] == 'User' && User.find_by_id(params[:publisher])) ||
+       (params[:publisher_type] == 'Business' && Business.find_by_id(params[:publisher])) ||
+       (params[:publisher_type] == 'Admin' && Admin.find_by_id(params[:publisher]))
+      if Post.find_by_id(params[:post_id])
+        comment = Comment.new(comment_params)
+        comment.likes = 0
+        if comment.save
+          render json: { id: comment.id }, status: 200
+        else
+          render json: { error: 'Failed to save comment' }, status: 500
+        end
+      else
+        render json: { error: 'Post not found' }, status: 404
+      end
+    else
+      render json: { error: 'Publisher not found' }, status: 404
+    end
+  end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:post_id, :publisher, :publisher_type, :date, :content)
+  end
 end

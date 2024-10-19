@@ -28,6 +28,15 @@ Rails.application.routes.draw do
   # Business
   post '/commodity/register' => 'commodity#register', as: :commodity_register
 
+  # Post
+  post '/post/post' => 'post#post', as: :post_post
+
+  # Comment
+  post '/comment/post' => 'comment#post', as: :comment_post
+
+  # Announcement
+  post '/announcement/post' => 'announcement#post', as: :announcement_post
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
