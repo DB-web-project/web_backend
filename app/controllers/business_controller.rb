@@ -43,6 +43,27 @@ class BusinessController < ApplicationController
     end
   end
 
+  def find_by_id
+    business = Business.find_by(id: params[:id])
+    if business
+      preference = Preference.find_by(preferable: business)
+      tag = Tag.find_by(business: business)
+      render json: {
+        id: business.id,
+        name: business.name,
+        email: business.email,
+        tag: extract_tags(tag),
+        score: business.score,
+        preference: extract_preferences(preference),
+        avator: business.avator
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Business not found'
+      }, status: :not_found
+    end
+  end
+
   private
 
   def extract_preferences(preference)

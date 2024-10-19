@@ -2752,3 +2752,95 @@ Processing by BusinessController#login as */*
 Completed 200 OK in 228ms (Views: 0.3ms | ActiveRecord: 0.2ms (3 queries, 0 cached) | GC: 1.0ms)
 
 
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/user/find/3" for 127.0.0.1 at 2024-10-19 16:53:57 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/user/find/3"):
+  
+Started GET "/user/find/3" for 127.0.0.1 at 2024-10-19 16:54:29 +0800
+Processing by UserController#find_by_id as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:41:in `find_by_id'
+  [1m[36mPreference Load (5.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "User"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:43:in `find_by_id'
+Completed 200 OK in 68ms (Views: 0.4ms | ActiveRecord: 9.4ms (2 queries, 0 cached) | GC: 2.0ms)
+
+
+Started GET "/user/find/4" for 127.0.0.1 at 2024-10-19 16:54:53 +0800
+Processing by UserController#find_by_id as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:41:in `find_by_id'
+Completed 404 Not Found in 32ms (Views: 0.2ms | ActiveRecord: 4.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mAdmin Load (1.3ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/admin/find/2" for 127.0.0.1 at 2024-10-19 16:56:47 +0800
+Processing by AdminController#find_by_id as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mAdmin Load (0.2ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:41:in `find_by_id'
+  [1m[36mPreference Load (0.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Admin"], ["preferable_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:43:in `find_by_id'
+Completed 200 OK in 36ms (Views: 0.2ms | ActiveRecord: 2.5ms (2 queries, 0 cached) | GC: 0.8ms)
+
+
+  [1m[36mBusiness Load (0.2ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/business/find/3" for 127.0.0.1 at 2024-10-19 16:58:03 +0800
+Processing by BusinessController#find_by_id as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mBusiness Load (1.3ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:47:in `find_by_id'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:49:in `find_by_id'
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:50:in `find_by_id'
+Completed 200 OK in 71ms (Views: 0.5ms | ActiveRecord: 4.3ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/business/find/3" for 127.0.0.1 at 2024-10-19 16:58:29 +0800
+Processing by BusinessController#find_by_id as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mBusiness Load (0.3ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:47:in `find_by_id'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:49:in `find_by_id'
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:50:in `find_by_id'
+Completed 200 OK in 27ms (Views: 14.4ms | ActiveRecord: 0.3ms (3 queries, 0 cached) | GC: 13.2ms)
+
+
+Started GET "/business/find/3" for 127.0.0.1 at 2024-10-19 16:58:31 +0800
+Processing by BusinessController#find_by_id as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:47:in `find_by_id'
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:49:in `find_by_id'
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:50:in `find_by_id'
+Completed 200 OK in 11ms (Views: 2.3ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/business/find/4" for 127.0.0.1 at 2024-10-19 16:58:45 +0800
+Processing by BusinessController#find_by_id as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:47:in `find_by_id'
+Completed 404 Not Found in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/business/find/3" for 127.0.0.1 at 2024-10-19 16:58:53 +0800
+Processing by BusinessController#find_by_id as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:47:in `find_by_id'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:49:in `find_by_id'
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:50:in `find_by_id'
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+

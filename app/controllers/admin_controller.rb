@@ -37,6 +37,24 @@ class AdminController < ApplicationController
     end
   end
 
+  def find_by_id
+    admin = Admin.find_by(id: params[:id])
+    if admin
+      preference = Preference.find_by(preferable: admin)
+      render json: {
+        id: admin.id,
+        name: admin.name,
+        email: admin.email,
+        preference: extract_preferences(preference),
+        avator: admin.avator
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Admin not found'
+      }, status: :not_found
+    end
+  end
+
   private
 
   def extract_preferences(preference)

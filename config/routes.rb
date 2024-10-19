@@ -13,14 +13,17 @@ Rails.application.routes.draw do
   # User
   post '/user/register' => 'user#register', as: :user_register
   post '/user/login' => 'user#login', as: :user_login
+  get '/user/find/:id' => 'user#find_by_id', as: :user_find_by_id
 
   # Admin
   post '/admin/register' => 'admin#register', as: :admin_register
   post '/admin/login' => 'admin#login', as: :admin_login
+  get '/admin/find/:id' => 'admin#find_by_id', as: :admin_find_by_id
 
   # Business
   post '/business/register' => 'business#register', as: :business_register
   post '/business/login' => 'business#login', as: :business_login
+  get '/business/find/:id' => 'business#find_by_id', as: :business_find_by_id
 
   # Business
   post '/commodity/register' => 'commodity#register', as: :commodity_register

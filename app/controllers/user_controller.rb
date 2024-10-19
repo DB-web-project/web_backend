@@ -37,6 +37,24 @@ class UserController < ApplicationController
     end
   end
 
+  def find_by_id
+    user = User.find_by(id: params[:id])
+    if user
+      preference = Preference.find_by(preferable: user)
+      render json: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        preference: extract_preferences(preference),
+        avator: user.avator
+      }, status: :ok # 200
+    else
+      render json: {
+        errors: 'User not found'
+      }, status: :not_found # 404
+    end
+  end
+
   private
 
   def extract_preferences(preference)
