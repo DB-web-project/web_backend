@@ -15,23 +15,27 @@ Rails.application.routes.draw do
   post '/user/login' => 'user#login', as: :user_login
   get '/user/find/:id' => 'user#find_by_id', as: :user_find_by_id
   delete '/user/delete/:id' => 'user#delete_by_id', as: :user_delete_by_id
+  put '/user/update/:id' => 'user#update_by_id', as: :user_update_by_id
 
   # Admin
   post '/admin/register' => 'admin#register', as: :admin_register
   post '/admin/login' => 'admin#login', as: :admin_login
   get '/admin/find/:id' => 'admin#find_by_id', as: :admin_find_by_id
   delete '/admin/delete/:id' => 'admin#delete_by_id', as: :admin_delete_by_id
+  put '/admin/update/:id' => 'admin#update_by_id', as: :admin_update_by_id
 
   # Business
   post '/business/register' => 'business#register', as: :business_register
   post '/business/login' => 'business#login', as: :business_login
   get '/business/find/:id' => 'business#find_by_id', as: :business_find_by_id
   delete '/business/delete/:id' => 'business#delete_by_id', as: :business_delete_by_id
+  put '/business/update/:id' => 'business#update_by_id', as: :business_update_by_id
 
   # Commodity
   post '/commodity/register' => 'commodity#register', as: :commodity_register
   get '/commodity/find/:id' => 'commodity#find_by_id', as: :commodity_find_by_id
   delete '/commodity/delete/:id' => 'commodity#delete_by_id', as: :commodity_delete_by_id
+  put 'commodity/update/:id' => 'commodity#update_by_id', as: :commodity_update_by_id
 
   # Post
   post '/post/post' => 'post#post', as: :post_post

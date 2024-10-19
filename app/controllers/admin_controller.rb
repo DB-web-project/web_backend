@@ -69,6 +69,20 @@ class AdminController < ApplicationController
     end
   end
 
+  def update_by_id
+    admin = Admin.find_by(id: params[:id])
+    if admin
+      admin.update(admin_params)
+      render json: {
+        message: 'Admin updated'
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Admin not found'
+      }, status: :not_found
+    end
+  end
+
   private
 
   def extract_preferences(preference)

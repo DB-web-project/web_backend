@@ -3679,3 +3679,681 @@ Completed 200 OK in 7ms (Views: 0.4ms | ActiveRecord: 0.7ms (2 queries, 0 cached
   [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
   [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
   [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/user/update?id=1" for 127.0.0.1 at 2024-10-19 20:29:21 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [PUT] "/user/update"):
+  
+Started PUT "/user/update/1" for 127.0.0.1 at 2024-10-19 20:30:27 +0800
+Processing by UserController#update_by_id as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "id"=>"1", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:73:in `update_by_id'
+Completed 404 Not Found in 15ms (Views: 0.4ms | ActiveRecord: 3.2ms (1 query, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/user/register" for 127.0.0.1 at 2024-10-19 20:31:13 +0800
+Processing by UserController#register as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:6:in `block in register'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "avator", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "杜启嵘"], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 12:31:13.614891"], ["updated_at", "2024-10-19 12:31:13.614891"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mPreference Create (0.1ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 12:31:13.663526"], ["updated_at", "2024-10-19 12:31:13.663526"], ["preferable_type", "User"], ["preferable_id", 4]]
+  ↳ app/controllers/user_controller.rb:8:in `block in register'
+  [1m[36mPreference Load (1.5ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 4], ["preferable_type", "User"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:9:in `block in register'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:9:in `block in register'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? AND "users"."id" != ? LIMIT ?[0m  [["name", "杜启嵘"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:9:in `block in register'
+  [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "avator" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-19 12:31:13.697787"], ["id", 4]]
+  ↳ app/controllers/user_controller.rb:9:in `block in register'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_controller.rb:5:in `register'
+Completed 201 Created in 361ms (Views: 0.2ms | ActiveRecord: 18.9ms (8 queries, 0 cached) | GC: 2.1ms)
+
+
+Started POST "/user/register" for 127.0.0.1 at 2024-10-19 20:32:13 +0800
+Processing by UserController#register as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_controller.rb:5:in `register'
+Completed 400 Bad Request in 244ms (Views: 0.2ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/user/update/4" for 127.0.0.1 at 2024-10-19 20:32:31 +0800
+Processing by UserController#update_by_id as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "id"=>"4", "user"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:73:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/user_controller.rb:75:in `update_by_id'
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:75:in `update_by_id'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."name" = ? AND "users"."id" != ? LIMIT ?[0m  [["name", "杜启嵘"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/user_controller.rb:75:in `update_by_id'
+  [1m[36mUser Update (0.6ms)[0m  [1m[33mUPDATE "users" SET "email" = ?, "updated_at" = ?, "password_digest" = ? WHERE "users"."id" = ?[0m  [["email", "[FILTERED]"], ["updated_at", "2024-10-19 12:32:32.209793"], ["password_digest", "[FILTERED]"], ["id", 4]]
+  ↳ app/controllers/user_controller.rb:75:in `update_by_id'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/user_controller.rb:75:in `update_by_id'
+Completed 200 OK in 243ms (Views: 0.5ms | ActiveRecord: 3.4ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/admin/update/1" for 127.0.0.1 at 2024-10-19 20:35:52 +0800
+Processing by AdminController#update_by_id as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "id"=>"1", "admin"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:73:in `update_by_id'
+Completed 404 Not Found in 5ms (Views: 0.2ms | ActiveRecord: 2.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/register" for 127.0.0.1 at 2024-10-19 20:36:20 +0800
+Processing by AdminController#register as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "admin"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:6:in `block in register'
+  [1m[36mAdmin Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mAdmin Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."name" = ? LIMIT ?[0m  [["name", "杜启嵘"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mAdmin Create (0.1ms)[0m  [1m[32mINSERT INTO "admins" ("name", "email", "password", "avator", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "杜启嵘"], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 12:36:20.986201"], ["updated_at", "2024-10-19 12:36:20.986201"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/admin_controller.rb:7:in `block in register'
+  [1m[36mPreference Create (0.2ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 12:36:21.007394"], ["updated_at", "2024-10-19 12:36:21.007394"], ["preferable_type", "Admin"], ["preferable_id", 4]]
+  ↳ app/controllers/admin_controller.rb:8:in `block in register'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 4], ["preferable_type", "Admin"], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:9:in `block in register'
+  [1m[36mAdmin Update (0.1ms)[0m  [1m[33mUPDATE "admins" SET "avator" = ?, "updated_at" = ? WHERE "admins"."id" = ?[0m  [["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-19 12:36:21.025168"], ["id", 4]]
+  ↳ app/controllers/admin_controller.rb:9:in `block in register'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:5:in `register'
+Completed 201 Created in 254ms (Views: 0.2ms | ActiveRecord: 2.6ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mAdmin Load (0.7ms)[0m  [1m[34mSELECT "admins".* FROM "admins" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/admin/update/1" for 127.0.0.1 at 2024-10-19 20:36:40 +0800
+Processing by AdminController#update_by_id as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "id"=>"1", "admin"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:73:in `update_by_id'
+Completed 404 Not Found in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/admin/update/4" for 127.0.0.1 at 2024-10-19 20:36:44 +0800
+Processing by AdminController#update_by_id as */*
+  Parameters: {"name"=>"杜启嵘", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "id"=>"4", "admin"=>{"name"=>"杜启嵘", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:73:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/admin_controller.rb:75:in `update_by_id'
+  [1m[36mAdmin Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "admins" WHERE "admins"."email" = ? AND "admins"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:75:in `update_by_id'
+  [1m[36mAdmin Update (0.1ms)[0m  [1m[33mUPDATE "admins" SET "email" = ?, "updated_at" = ?, "password_digest" = ? WHERE "admins"."id" = ?[0m  [["email", "[FILTERED]"], ["updated_at", "2024-10-19 12:36:44.938204"], ["password_digest", "[FILTERED]"], ["id", 4]]
+  ↳ app/controllers/admin_controller.rb:75:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/admin_controller.rb:75:in `update_by_id'
+Completed 200 OK in 207ms (Views: 0.5ms | ActiveRecord: 1.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/admin/find/2" for 127.0.0.1 at 2024-10-19 20:37:03 +0800
+Processing by AdminController#find_by_id as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:41:in `find_by_id'
+Completed 404 Not Found in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/admin/find/4" for 127.0.0.1 at 2024-10-19 20:37:06 +0800
+Processing by AdminController#find_by_id as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:41:in `find_by_id'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Admin"], ["preferable_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/admin_controller.rb:43:in `find_by_id'
+Completed 200 OK in 5ms (Views: 0.8ms | ActiveRecord: 0.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mBusiness Load (0.2ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/business/update/4" for 127.0.0.1 at 2024-10-19 20:38:39 +0800
+  
+ActionController::RoutingError (No route matches [PUT] "/business/update/4"):
+  
+Started PUT "/business/update/4" for 127.0.0.1 at 2024-10-19 20:38:55 +0800
+  
+AbstractController::ActionNotFound (The action 'update_by_id' could not be found for BusinessController):
+  
+actionpack (7.2.1) lib/abstract_controller/base.rb:158:in `process'
+actionview (7.2.1) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.2.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (7.2.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (7.2.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (7.2.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (7.2.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (7.2.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (7.2.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (7.2.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (7.2.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (7.2.1) lib/action_dispatch/routing/route_set.rb:896:in `call'
+rack (3.1.7) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.7) lib/rack/etag.rb:29:in `call'
+rack (3.1.7) lib/rack/conditional_get.rb:43:in `call'
+rack (3.1.7) lib/rack/head.rb:15:in `call'
+actionpack (7.2.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.2.1) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.2.1) lib/active_record/migration.rb:674:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (7.2.1) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.2.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (7.2.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (7.2.1) lib/rails/rack/logger.rb:29:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/request_id.rb:33:in `call'
+rack (3.1.7) lib/rack/method_override.rb:28:in `call'
+rack (3.1.7) lib/rack/runtime.rb:24:in `call'
+activesupport (7.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.2.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.2.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.7) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.2.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (7.2.1) lib/rails/engine.rb:535:in `call'
+puma (6.4.3) lib/puma/configuration.rb:272:in `call'
+puma (6.4.3) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.3) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.3) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.3) lib/puma/server.rb:464:in `process_client'
+puma (6.4.3) lib/puma/server.rb:245:in `block in run'
+puma (6.4.3) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started PUT "/business/update/4" for 127.0.0.1 at 2024-10-19 20:39:23 +0800
+Processing by BusinessController#update_by_id as */*
+  Parameters: {"name"=>"商店", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "id"=>"4", "business"=>{"name"=>"商店", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:82:in `update_by_id'
+Completed 404 Not Found in 9ms (Views: 0.3ms | ActiveRecord: 2.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/business/register" for 127.0.0.1 at 2024-10-19 20:39:44 +0800
+Processing by BusinessController#register as */*
+  Parameters: {"name"=>"商店", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "business"=>{"name"=>"商店", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:6:in `block in register'
+  [1m[36mBusiness Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mBusiness Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? LIMIT ?[0m  [["name", "商店"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mBusiness Create (0.3ms)[0m  [1m[32mINSERT INTO "businesses" ("name", "tag", "score", "email", "password", "avator", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "商店"], ["tag", nil], ["score", nil], ["email", "[FILTERED]"], ["password", "[FILTERED]"], ["avator", nil], ["created_at", "2024-10-19 12:39:44.641858"], ["updated_at", "2024-10-19 12:39:44.641858"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/business_controller.rb:7:in `block in register'
+  [1m[36mPreference Create (0.1ms)[0m  [1m[32mINSERT INTO "preferences" ("preference1", "preference2", "preference3", "preference4", "preference5", "created_at", "updated_at", "preferable_type", "preferable_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preference1", nil], ["preference2", nil], ["preference3", nil], ["preference4", nil], ["preference5", nil], ["created_at", "2024-10-19 12:39:44.672792"], ["updated_at", "2024-10-19 12:39:44.672792"], ["preferable_type", "Business"], ["preferable_id", 5]]
+  ↳ app/controllers/business_controller.rb:8:in `block in register'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_id" = ? AND "preferences"."preferable_type" = ? LIMIT ?[0m  [["preferable_id", 5], ["preferable_type", "Business"], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mTag Create (0.1ms)[0m  [1m[32mINSERT INTO "tags" ("tag1", "tag2", "tag3", "tag4", "tag5", "created_at", "updated_at", "business_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["tag1", nil], ["tag2", nil], ["tag3", nil], ["tag4", nil], ["tag5", nil], ["created_at", "2024-10-19 12:39:44.706866"], ["updated_at", "2024-10-19 12:39:44.706866"], ["business_id", 5]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mBusiness Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mBusiness Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["name", "商店"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mBusiness Update (0.1ms)[0m  [1m[33mUPDATE "businesses" SET "score" = ?, "avator" = ?, "updated_at" = ? WHERE "businesses"."id" = ?[0m  [["score", 10.0], ["avator", "/path/to/default/avator.jpg"], ["updated_at", "2024-10-19 12:39:44.721086"], ["id", 5]]
+  ↳ app/controllers/business_controller.rb:10:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/business_controller.rb:5:in `register'
+Completed 201 Created in 287ms (Views: 0.8ms | ActiveRecord: 3.2ms (10 queries, 0 cached) | GC: 6.6ms)
+
+
+Started PUT "/business/update/5" for 127.0.0.1 at 2024-10-19 20:39:56 +0800
+Processing by BusinessController#update_by_id as */*
+  Parameters: {"name"=>"商店", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "id"=>"5", "business"=>{"name"=>"商店", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:82:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:84:in `update_by_id'
+  [1m[36mBusiness Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:84:in `update_by_id'
+  [1m[36mBusiness Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["name", "商店"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:84:in `update_by_id'
+  [1m[36mBusiness Update (0.1ms)[0m  [1m[33mUPDATE "businesses" SET "updated_at" = ?, "password_digest" = ? WHERE "businesses"."id" = ?[0m  [["updated_at", "2024-10-19 12:39:57.133969"], ["password_digest", "[FILTERED]"], ["id", 5]]
+  ↳ app/controllers/business_controller.rb:84:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/business_controller.rb:84:in `update_by_id'
+Completed 200 OK in 213ms (Views: 0.2ms | ActiveRecord: 1.1ms (4 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/business/find/5" for 127.0.0.1 at 2024-10-19 20:40:21 +0800
+Processing by BusinessController#find_by_id as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:47:in `find_by_id'
+  [1m[36mPreference Load (0.7ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:49:in `find_by_id'
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:50:in `find_by_id'
+Completed 200 OK in 23ms (Views: 1.0ms | ActiveRecord: 0.8ms (3 queries, 0 cached) | GC: 9.2ms)
+
+
+Started PUT "/business/update/5" for 127.0.0.1 at 2024-10-19 20:40:39 +0800
+Processing by BusinessController#update_by_id as */*
+  Parameters: {"name"=>"商店", "password"=>"[FILTERED]", "email"=>"[FILTERED]", "id"=>"5", "business"=>{"name"=>"商店", "email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:82:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/business_controller.rb:84:in `update_by_id'
+  [1m[36mBusiness Exists? (4.8ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."email" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["email", "[FILTERED]"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:84:in `update_by_id'
+  [1m[36mBusiness Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "businesses" WHERE "businesses"."name" = ? AND "businesses"."id" != ? LIMIT ?[0m  [["name", "商店"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:84:in `update_by_id'
+  [1m[36mBusiness Update (1.6ms)[0m  [1m[33mUPDATE "businesses" SET "email" = ?, "updated_at" = ?, "password_digest" = ? WHERE "businesses"."id" = ?[0m  [["email", "[FILTERED]"], ["updated_at", "2024-10-19 12:40:39.503514"], ["password_digest", "[FILTERED]"], ["id", 5]]
+  ↳ app/controllers/business_controller.rb:84:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/business_controller.rb:84:in `update_by_id'
+Completed 200 OK in 230ms (Views: 1.6ms | ActiveRecord: 6.6ms (4 queries, 0 cached) | GC: 31.2ms)
+
+
+Started GET "/business/find/5" for 127.0.0.1 at 2024-10-19 20:40:43 +0800
+Processing by BusinessController#find_by_id as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:47:in `find_by_id'
+  [1m[36mPreference Load (0.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."preferable_type" = ? AND "preferences"."preferable_id" = ? LIMIT ?[0m  [["preferable_type", "Business"], ["preferable_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:49:in `find_by_id'
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" WHERE "tags"."business_id" = ? LIMIT ?[0m  [["business_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/business_controller.rb:50:in `find_by_id'
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 0.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/commodity/update/1" for 127.0.0.1 at 2024-10-19 20:43:26 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"1", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:55:in `update_by_id'
+Completed 404 Not Found in 9ms (Views: 0.3ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mCommodity Load (1.0ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 20:44:00 +0800
+Processing by CommodityController#register as */*
+  Parameters: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1, "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:4:in `block in register'
+  [1m[36mBusiness Load (0.1ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:7:in `block in register'
+  [1m[36mCommodity Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? LIMIT ?[0m  [["name", "黄桃罐头"], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:3:in `register'
+Completed 400 Bad Request in 48ms (Views: 0.2ms | ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 7.2ms)
+
+
+  [1m[36mBusiness Load (3.5ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 20:44:14 +0800
+Processing by CommodityController#register as */*
+  Parameters: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>5, "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>5}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:7:in `block in register'
+  [1m[36mBusiness Load (1.0ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:7:in `block in register'
+  [1m[36mCommodity Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? LIMIT ?[0m  [["name", "黄桃罐头"], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:7:in `block in register'
+  [1m[36mCommodity Create (0.2ms)[0m  [1m[32mINSERT INTO "commodities" ("name", "price", "score", "introduction", "business_id", "homepage", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "黄桃罐头"], ["price", 26.0], ["score", 10.0], ["introduction", "黄桃罐头是一种水果罐头"], ["business_id", 5], ["homepage", "/path/to/default/homepage.html"], ["created_at", "2024-10-19 12:44:14.263910"], ["updated_at", "2024-10-19 12:44:14.263910"]]
+  ↳ app/controllers/commodity_controller.rb:7:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:3:in `register'
+Completed 201 Created in 17ms (Views: 0.2ms | ActiveRecord: 1.5ms (3 queries, 0 cached) | GC: 0.4ms)
+
+
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:44:26 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:55:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+  [1m[36mCommodity Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mCommodity Load (0.3ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:44:53 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:55:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+  [1m[36mCommodity Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 2.8ms (2 queries, 0 cached) | GC: 1.6ms)
+
+
+Started PUT "/commodity/update/5" for 127.0.0.1 at 2024-10-19 20:45:33 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"5", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:55:in `update_by_id'
+Completed 404 Not Found in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/commodity/update/5" for 127.0.0.1 at 2024-10-19 20:46:15 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"5", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:55:in `update_by_id'
+Completed 404 Not Found in 2ms (Views: 0.2ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:46:23 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:55:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+  [1m[36mCommodity Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+Completed 200 OK in 15ms (Views: 0.1ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 6.1ms)
+
+
+Started GET "/commodity/find/5" for 127.0.0.1 at 2024-10-19 20:46:36 +0800
+Processing by CommodityController#find_by_id as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:22:in `find_by_id'
+Completed 404 Not Found in 3ms (Views: 0.2ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/commodity/find/4" for 127.0.0.1 at 2024-10-19 20:46:40 +0800
+Processing by CommodityController#find_by_id as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:22:in `find_by_id'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.5ms)
+
+
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:47:21 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:55:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+  [1m[36mCommodity Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/commodity/find/4" for 127.0.0.1 at 2024-10-19 20:47:25 +0800
+Processing by CommodityController#find_by_id as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:22:in `find_by_id'
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:47:38 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:55:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+  [1m[36mCommodity Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/commodity_controller.rb:57:in `update_by_id'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/commodity/find/4" for 127.0.0.1 at 2024-10-19 20:47:43 +0800
+Processing by CommodityController#find_by_id as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:22:in `find_by_id'
+Completed 200 OK in 33ms (Views: 11.9ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:50:06 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+Can't verify CSRF token authenticity.
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:55:in `update_by_id'
+Completed 200 OK in 17ms (Views: 1.7ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.1ms)
+
+
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:51:21 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:56:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+  [1m[36mCommodity Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+Completed 200 OK in 30ms (Views: 1.6ms | ActiveRecord: 2.2ms (2 queries, 0 cached) | GC: 1.4ms)
+
+
+  [1m[36mCommodity Load (2.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:51:43 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:56:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+  [1m[36mCommodity Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:52:15 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:56:in `update_by_id'
+Completed 200 OK in 16ms (Views: 2.0ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.8ms)
+
+
+  [1m[36mCommodity Load (0.4ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:53:56 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:56:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:60:in `update_by_id'
+  [1m[36mCommodity Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:60:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/commodity_controller.rb:60:in `update_by_id'
+Completed 200 OK in 36ms (Views: 4.6ms | ActiveRecord: 2.1ms (2 queries, 0 cached) | GC: 7.1ms)
+
+
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:54:45 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+  [1m[36mCommodity Load (0.2ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:56:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:60:in `update_by_id'
+  [1m[36mCommodity Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:60:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/commodity_controller.rb:60:in `update_by_id'
+Completed 200 OK in 45ms (Views: 1.5ms | ActiveRecord: 3.2ms (2 queries, 0 cached) | GC: 7.4ms)
+
+
+Started GET "/commodity/find/4" for 127.0.0.1 at 2024-10-19 20:54:48 +0800
+Processing by CommodityController#find_by_id as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:23:in `find_by_id'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 20:54:53 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:56:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:60:in `update_by_id'
+  [1m[36mCommodity Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:60:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/commodity_controller.rb:60:in `update_by_id'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.3ms)
+
+
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 21:00:03 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+  [1m[36mCommodity Load (0.2ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:56:in `update_by_id'
+[31mUnpermitted parameters: :id, :commodity. Context: { controller: CommodityController, action: update_by_id, request: #<ActionDispatch::Request:0x00007abbb5db17d0>, params: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "controller"=>"commodity", "action"=>"update_by_id", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}} }[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+  [1m[36mCommodity Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+  [1m[36mCommodity Update (0.2ms)[0m  [1m[33mUPDATE "commodities" SET "name" = ?, "price" = ?, "introduction" = ?, "updated_at" = ? WHERE "commodities"."id" = ?[0m  [["name", "薯片"], ["price", 6.0], ["introduction", "薯片是一种零食"], ["updated_at", "2024-10-19 13:00:03.378567"], ["id", 4]]
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+Completed 200 OK in 27ms (Views: 1.1ms | ActiveRecord: 4.2ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+  [1m[36mCommodity Load (0.4ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started PUT "/commodity/update/4" for 127.0.0.1 at 2024-10-19 21:00:38 +0800
+Processing by CommodityController#update_by_id as */*
+  Parameters: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}}
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" WHERE "commodities"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:56:in `update_by_id'
+[31mUnpermitted parameters: :id, :commodity. Context: { controller: CommodityController, action: update_by_id, request: #<ActionDispatch::Request:0x00007abbb5dcb4a0>, params: {"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食", "controller"=>"commodity", "action"=>"update_by_id", "id"=>"4", "commodity"=>{"name"=>"薯片", "price"=>6, "introduction"=>"薯片是一种零食"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+  [1m[36mCommodity Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? AND "commodities"."id" != ? LIMIT ?[0m  [["name", "薯片"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:58:in `update_by_id'
+Completed 200 OK in 20ms (Views: 0.6ms | ActiveRecord: 1.7ms (2 queries, 0 cached) | GC: 0.4ms)
+
+
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 21:04:04 +0800
+Processing by CommodityController#register as */*
+  Parameters: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1, "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1}}
+[31mUnpermitted parameter: :commodity. Context: { controller: CommodityController, action: register, request: #<ActionDispatch::Request:0x00007abbb5dc1ea0>, params: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1, "controller"=>"commodity", "action"=>"register", "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>1}} }[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:5:in `block in register'
+  [1m[36mBusiness Load (0.0ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:8:in `block in register'
+  [1m[36mCommodity Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? LIMIT ?[0m  [["name", "黄桃罐头"], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:8:in `block in register'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:4:in `register'
+Completed 400 Bad Request in 33ms (Views: 1.4ms | ActiveRecord: 1.7ms (2 queries, 0 cached) | GC: 0.5ms)
+
+
+  [1m[36mBusiness Load (1.6ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 21:04:23 +0800
+Error occurred while parsing request parameters.
+Contents:
+
+{
+    "name": "黄桃罐头",
+    "price": 26,
+    "introduction": "黄桃罐头是一种水果罐头",
+    "business_id": 5
+Processing by CommodityController#register as */*
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionDispatch::Http::Parameters::ParseError (Error occurred while parsing request parameters):
+
+Causes:
+JSON::ParserError (unexpected token at '{
+    "name": "黄桃罐头",
+    "price": 26,
+    "introduction": "黄桃罐头是一种水果罐头",
+    "business_id": 5')
+  
+app/controllers/commodity_controller.rb:72:in `commodity_params_register'
+app/controllers/commodity_controller.rb:5:in `block in register'
+app/controllers/commodity_controller.rb:4:in `register'
+Started POST "/commodity/register" for 127.0.0.1 at 2024-10-19 21:04:32 +0800
+Processing by CommodityController#register as */*
+  Parameters: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>5, "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>5}}
+[31mUnpermitted parameter: :commodity. Context: { controller: CommodityController, action: register, request: #<ActionDispatch::Request:0x00007abbb584a468>, params: {"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>5, "controller"=>"commodity", "action"=>"register", "commodity"=>{"name"=>"黄桃罐头", "price"=>26, "introduction"=>"黄桃罐头是一种水果罐头", "business_id"=>5}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/commodity_controller.rb:8:in `block in register'
+  [1m[36mBusiness Load (0.9ms)[0m  [1m[34mSELECT "businesses".* FROM "businesses" WHERE "businesses"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:8:in `block in register'
+  [1m[36mCommodity Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "commodities" WHERE "commodities"."name" = ? LIMIT ?[0m  [["name", "黄桃罐头"], ["LIMIT", 1]]
+  ↳ app/controllers/commodity_controller.rb:8:in `block in register'
+  [1m[36mCommodity Create (0.2ms)[0m  [1m[32mINSERT INTO "commodities" ("name", "price", "score", "introduction", "business_id", "homepage", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "黄桃罐头"], ["price", 26.0], ["score", 10.0], ["introduction", "黄桃罐头是一种水果罐头"], ["business_id", 5], ["homepage", "/path/to/default/homepage.html"], ["created_at", "2024-10-19 13:04:32.726867"], ["updated_at", "2024-10-19 13:04:32.726867"]]
+  ↳ app/controllers/commodity_controller.rb:8:in `block in register'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/commodity_controller.rb:4:in `register'
+Completed 201 Created in 17ms (Views: 0.3ms | ActiveRecord: 1.3ms (3 queries, 0 cached) | GC: 0.6ms)
+
+
+  [1m[36mCommodity Load (0.1ms)[0m  [1m[34mSELECT "commodities".* FROM "commodities" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]

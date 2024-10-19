@@ -69,6 +69,20 @@ class UserController < ApplicationController
     end
   end
 
+  def update_by_id
+    user = User.find_by(id: params[:id])
+    if user
+      user.update(user_params)
+      render json: {
+        message: 'User updated'
+      }, status: :ok # 200
+    else
+      render json: {
+        errors: 'User not found'
+      }, status: :not_found # 404
+    end
+  end
+
   private
 
   def extract_preferences(preference)

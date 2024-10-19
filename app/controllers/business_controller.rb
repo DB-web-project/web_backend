@@ -78,6 +78,20 @@ class BusinessController < ApplicationController
     end
   end
 
+  def update_by_id
+    business = Business.find_by(id: params[:id])
+    if business
+      business.update(business_params)
+      render json: {
+        message: 'Business updated'
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Business not found'
+      }, status: :not_found
+    end
+  end
+
   private
 
   def extract_preferences(preference)
