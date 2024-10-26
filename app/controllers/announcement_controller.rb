@@ -5,9 +5,9 @@ class AnnouncementController < ApplicationController
     if Admin.find_by(id: params[:publisher])
       announcement = Announcement.new(announcement_params)
       if announcement.save
-        render json: { id: announcement.id }
+        render json: { id: announcement.id }, status: :created
       else
-        render json: { message: 'Announcement creation failed' }
+        render json: { message: 'Announcement creation failed' }, status: :bad_request
       end
     else
       render json: { message: 'Invalid publisher' }
