@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   # Announcement
   post '/announcement/post' => 'announcement#post', as: :announcement_post
   get '/announcement/find/:id' => 'announcement#find_by_id', as: :announcement_find_by_id
+  get '/announcement/find_all' => 'announcement#find_all', as: :announcement_find_all
   delete '/announcement/delete/:id' => 'announcement#delete_by_id', as: :announcement_delete_by_id
 
   # Defines the root path route ("/")

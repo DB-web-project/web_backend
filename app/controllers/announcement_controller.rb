@@ -28,6 +28,16 @@ class AnnouncementController < ApplicationController
     end
   end
 
+  def find_all
+    announcements = Announcement.all
+    if announcements
+      ids = announcements.map(&:id)
+      render json: { ids: ids }, status: :ok
+    else
+      render json: { message: 'No announcements found' }, status: :not_found
+    end
+  end
+
   def delete_by_id
     announcement = Announcement.find_by(id: params[:id])
     if announcement
