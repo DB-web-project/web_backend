@@ -25,7 +25,8 @@ class PostController < ApplicationController
         publisher_type: post.publisher_type,
         date: post.date,
         likes: post.likes,
-        content: post.content
+        content: post.content,
+        title: post.title
       }, status: :ok
     else
       render json: { errors: 'post not found' }, status: :not_found
@@ -49,7 +50,8 @@ class PostController < ApplicationController
       publisher: params[:publisher],
       publisher_type: params[:publisher_type],
       date: params[:date],
-      content: params[:content]
+      content: params[:content],
+      title: params[:title]
     }
   end
 end

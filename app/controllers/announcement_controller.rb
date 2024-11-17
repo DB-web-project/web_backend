@@ -21,10 +21,11 @@ class AnnouncementController < ApplicationController
         id: announcement.id,
         date: announcement.date,
         content: announcement.content,
-        publisher: announcement.publisher
+        publisher: announcement.publisher,
+        title: announcement.title
       }, status: :ok
     else
-      render json: { message: 'Announcement not found' }, status: :not_found
+      render json: { errors: 'Announcement not found' }, status: :not_found
     end
   end
 
@@ -51,6 +52,6 @@ class AnnouncementController < ApplicationController
   private
 
   def announcement_params
-    params.require(:announcement).permit(:date, :content, :publisher)
+    params.require(:announcement).permit(:date, :content, :publisher, :title)
   end
 end
