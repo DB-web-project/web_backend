@@ -3,7 +3,8 @@ class CommodityController < ApplicationController
   def register
     ActiveRecord::Base.transaction do
       commodity = Commodity.new(commodity_params_register)
-      commodity.score = 10
+      commodity.score = 0
+      commodity.rating_count = 0
       commodity.homepage = '/path/to/default/homepage.html'
       if commodity.save
         render json: {
@@ -81,6 +82,22 @@ class CommodityController < ApplicationController
     else
       render json: {
         errors: 'Not enough commodities'
+      }, status: :not_found
+    end
+  end
+
+  def elvaluate
+    commodity = Commodity.find_by(id: params[:id])
+    if commodity
+      commodity.score = (commodity.score * commodity.rating_count + params[:score].to_i) / (commodity.rating_count + 1)
+      commodity.rating_count += 1
+      commodity.save
+      render json: {
+        score: commodity.score
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Commodity not found'
       }, status: :not_found
     end
   end

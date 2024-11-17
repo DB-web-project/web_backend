@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   delete '/commodity/delete/:id' => 'commodity#delete_by_id', as: :commodity_delete_by_id
   put 'commodity/update/:id' => 'commodity#update_by_id', as: :commodity_update_by_id
   get 'commodity/num/:num' => 'commodity#sum', as: :commodity_sum
+  post 'commodity/evaluate' => 'commodity#elvaluate', as: :commodity_elvaluate
 
   # Post
   post '/post/post' => 'post#post', as: :post_post
