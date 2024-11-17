@@ -66,6 +66,25 @@ class CommodityController < ApplicationController
     end
   end
 
+  # 随机选取num个商品, 返回他们的id
+  def sum
+    num = params[:num].to_i
+    if Commodity.all.length >= num
+      commodities = Commodity.all.sample(num)
+      ids = []
+      commodities.each do |commodity|
+        ids.push(commodity.id)
+      end
+      render json: {
+        ids: ids
+      }, status: :ok
+    else
+      render json: {
+        errors: 'Not enough commodities'
+      }, status: :not_found
+    end
+  end
+
   private # 定义不同的方法来过滤参数
 
   def commodity_params_register

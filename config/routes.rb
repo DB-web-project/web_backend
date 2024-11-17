@@ -40,10 +40,12 @@ Rails.application.routes.draw do
   get '/commodity/find/:id' => 'commodity#find_by_id', as: :commodity_find_by_id
   delete '/commodity/delete/:id' => 'commodity#delete_by_id', as: :commodity_delete_by_id
   put 'commodity/update/:id' => 'commodity#update_by_id', as: :commodity_update_by_id
+  get 'commodity/num/:num' => 'commodity#sum', as: :commodity_sum
 
   # Post
   post '/post/post' => 'post#post', as: :post_post
   get '/post/find/:id' => 'post#find_by_id', as: :post_find_by_id
+  get '/post/num/:num' => 'post#sum', as: :post_sum
   delete '/post/delete/:id' => 'post#delete_by_id', as: :post_delete_by_id
 
   # Comment

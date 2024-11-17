@@ -43,6 +43,20 @@ class PostController < ApplicationController
     end
   end
 
+  def sum
+    num = params[:num].to_i
+    if Post.all.length >= num
+      posts = Post.all.sample(num)
+      ids = []
+      posts.each do |post|
+        ids.push(post.id)
+      end
+      render json: { ids: ids }, status: :ok
+    else
+      render json: { errors: 'not enough posts' }, status: :not_found
+    end
+  end
+
   private
 
   def post_params
