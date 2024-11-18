@@ -42,12 +42,14 @@ Rails.application.routes.draw do
   put 'commodity/update/:id' => 'commodity#update_by_id', as: :commodity_update_by_id
   get 'commodity/num/:num' => 'commodity#sum', as: :commodity_sum
   post 'commodity/evaluate' => 'commodity#elvaluate', as: :commodity_elvaluate
+  get '/commodity/business/:id' => 'commodity#find_by_business', as: :commodity_find_by_business
 
   # Post
   post '/post/post' => 'post#post', as: :post_post
   get '/post/find/:id' => 'post#find_by_id', as: :post_find_by_id
   get '/post/num/:num' => 'post#sum', as: :post_sum
   delete '/post/delete/:id' => 'post#delete_by_id', as: :post_delete_by_id
+  get '/post/publisher/:id' => 'post#find_by_publisher', as: :post_find_by_publisher
 
   # Comment
   post '/comment/post' => 'comment#post', as: :comment_post
