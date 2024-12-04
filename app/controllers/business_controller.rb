@@ -7,13 +7,13 @@ class BusinessController < ApplicationController
       if business.save
         preference = Preference.create(preferable: business) # 选择外键为business
         tag = Tag.create
-        business.update(preference: preference, avator: '/path/to/default/avator.jpg', tag: tag, score: 10)
+        business.update(preference: preference, url: '/path/to/default/avator.jpg', tag: tag, score: 10)
         render json: {
           id: business.id,
           tag: business.tag.id,
           score: 10,
           preference: business.preference.id,
-          avator: business.avator
+          avator: business.url
         }, status: :created
       else
         render json: {
@@ -34,7 +34,7 @@ class BusinessController < ApplicationController
         score: business.score,
         email: business.email,
         preference: extract_preferences(preference),
-        avator: business.avator
+        avator: business.url
       }, status: :ok
     else
       render json: {
@@ -55,7 +55,7 @@ class BusinessController < ApplicationController
         tag: extract_tags(tag),
         score: business.score,
         preference: extract_preferences(preference),
-        avator: business.avator
+        avator: business.url
       }, status: :ok
     else
       render json: {
@@ -118,6 +118,41 @@ class BusinessController < ApplicationController
       render json: {
         errors: 'Tag not found'
       }, status: :not_found
+    end
+  end
+
+  def upload_avatar
+    @business = Business.find_by(id: params[:id])
+    if @business
+      if params[:avatar].present?
+        uploaded_file = params[:avatar]
+        uploads_dir = Rails.root.join('public', 'uploads')
+        FileUtils.mkdir_p(uploads_dir)
+        file_path = uploads_dir.join(uploaded_file.original_filename)
+        File.open(file_path, 'wb') do |file|
+          file.write(uploaded_file.read)
+        end
+        relative_path = "uploads/#{uploaded_file.original_filename}"
+        image_url = URI.join(request.base_url, relative_path).to_s
+        if @business.update_column(:url, image_url)
+          render json: { avatar: image_url }, status: :ok
+        else
+          render json: { errors: 'Business Update Failed!' }, status: :unprocessable_entity
+        end
+      else
+        render json: { errors: 'No picture uploaded' }, status: :bad_request
+      end
+    else
+      render json: { errors: 'Business not found' }, status: :not_found
+    end
+  end
+
+  def get_avatar
+    business = Business.find_by(id: params[:id])
+    if business
+      render json: { avatar: business.url }, status: :ok
+    else
+      render json: { errors: 'Business not found' }, status: :not_found
     end
   end
 

@@ -6,11 +6,11 @@ class AdminController < ApplicationController
       admin = Admin.new(admin_params)
       if admin.save
         preference = Preference.create(preferable: admin)
-        admin.update(preference: preference, avator: '/path/to/default/avator.jpg')
+        admin.update(preference: preference, url: '/path/to/default/avator.jpg')
         render json: {
           id: admin.id,
           preference: admin.preference.id,
-          avator: admin.avator
+          avator: admin.url
         }, status: :created
       else
         render json: {
@@ -28,7 +28,7 @@ class AdminController < ApplicationController
         id: admin.id,
         email: admin.email,
         preference: extract_preferences(preference),
-        avator: admin.avator
+        avator: admin.url
       }, status: :ok
     else
       render json: {
@@ -46,7 +46,7 @@ class AdminController < ApplicationController
         name: admin.name,
         email: admin.email,
         preference: extract_preferences(preference),
-        avator: admin.avator
+        avator: admin.url
       }, status: :ok
     else
       render json: {
@@ -94,6 +94,41 @@ class AdminController < ApplicationController
       render json: {
         errors: 'Preference not found'
       }, status: :not_found
+    end
+  end
+
+  def upload_avatar
+    @admin = Admin.find_by(id: params[:id])
+    if @admin
+      if params[:avatar].present?
+        uploaded_file = params[:avatar]
+        uploads_dir = Rails.root.join('public', 'uploads')
+        FileUtils.mkdir_p(uploads_dir)
+        file_path = uploads_dir.join(uploaded_file.original_filename)
+        File.open(file_path, 'wb') do |file|
+          file.write(uploaded_file.read)
+        end
+        relative_path = "uploads/#{uploaded_file.original_filename}"
+        image_url = URI.join(request.base_url, relative_path).to_s
+        if @admin.update_column(:url, image_url)
+          render json: { avatar: image_url }, status: :ok
+        else
+          render json: { errors: 'Admin Update Failed!' }, status: :unprocessable_entity
+        end
+      else
+        render json: { errors: 'No picture uploaded' }, status: :bad_request
+      end
+    else
+      render json: { errors: 'Admin not found' }, status: :not_found
+    end
+  end
+
+  def get_avatar
+    @admin = Admin.find_by(id: params[:id])
+    if @admin
+      render json: { avatar: @admin.url }, status: :ok
+    else
+      render json: { errors: 'Admin not found' }, status: :not_found
     end
   end
 

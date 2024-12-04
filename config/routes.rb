@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   delete '/admin/delete/:id' => 'admin#delete_by_id', as: :admin_delete_by_id
   put '/admin/update/:id' => 'admin#update_by_id', as: :admin_update_by_id
   put '/admin/preference/:id' => 'admin#update_preference_by_id', as: :admin_update_preference_by_id
+  post '/admin/upload' => 'admin#upload_avatar', as: :admin_upload_avatar
+  get '/admin/get_avatar/:id' => 'admin#get_avatar', as: :admin_get_avatar
 
   # Business
   post '/business/register' => 'business#register', as: :business_register
@@ -36,6 +38,8 @@ Rails.application.routes.draw do
   put '/business/update/:id' => 'business#update_by_id', as: :business_update_by_id
   put '/business/preference/:id' => 'business#update_preference_by_id', as: :business_update_preference_by_id
   put '/business/tag/:id' => 'business#update_tag_by_id', as: :business_update_tag_by_id
+  post '/business/upload' => 'business#upload_avatar', as: :business_upload_avatar
+  get '/business/get_avatar/:id' => 'business#get_avatar', as: :business_get_avatar
 
   # Commodity
   post '/commodity/register' => 'commodity#register', as: :commodity_register
@@ -45,6 +49,8 @@ Rails.application.routes.draw do
   get 'commodity/num/:num' => 'commodity#sum', as: :commodity_sum
   post 'commodity/evaluate' => 'commodity#elvaluate', as: :commodity_elvaluate
   get '/commodity/business/:id' => 'commodity#find_by_business', as: :commodity_find_by_business
+  post '/commodity/upload' => 'commodity#upload_homepage', as: :commodity_upload_homepage
+  get '/commodity/get_homepage/:id' => 'commodity#get_homepage', as: :commodity_get_homepage
 
   # Post
   post '/post/post' => 'post#post', as: :post_post
