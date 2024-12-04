@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   delete '/user/delete/:id' => 'user#delete_by_id', as: :user_delete_by_id
   put '/user/update/:id' => 'user#update_by_id', as: :user_update_by_id
   put '/user/preference/:id' => 'user#update_preference_by_id', as: :user_update_preference_by_id
+  post '/user/upload' => 'user#upload_avatar', as: :user_upload_avatar
+  get '/user/get_avatar/:id' => 'user#get_avatar', as: :user_get_avatar
 
   # Admin
   post '/admin/register' => 'admin#register', as: :admin_register

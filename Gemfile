@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'mysql2', '>= 0.4.4', '< 0.6.0' # MySQL 驱动
 
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick', '~> 4.11' # 用于图像处理
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.2.1'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]

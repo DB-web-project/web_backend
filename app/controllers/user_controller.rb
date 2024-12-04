@@ -6,11 +6,11 @@ class UserController < ApplicationController
       user = User.new(user_params)
       if user.save
         preference = Preference.create(preferable: user)
-        user.update(preference: preference, avator: '/path/to/default/avator.jpg')
+        user.update(preference: preference, url: '/path/to/default/avator.jpg')
         render json: {
           id: user.id,
           preference: user.preference.id,
-          avator: user.avator
+          avator: user.url
         }, status: :created
       else
         render json: {
@@ -28,7 +28,7 @@ class UserController < ApplicationController
         id: user.id,
         email: user.email,
         preference: extract_preferences(preference),
-        avator: user.avator
+        avator: user.url
       }, status: :ok # 200
     else
       render json: {
@@ -46,7 +46,7 @@ class UserController < ApplicationController
         name: user.name,
         email: user.email,
         preference: extract_preferences(preference),
-        avator: user.avator
+        avator: user.url
       }, status: :ok # 200
     else
       render json: {
@@ -94,6 +94,45 @@ class UserController < ApplicationController
       render json: {
         errors: 'User not found'
       }, status: :not_found # 404
+    end
+  end
+
+  def upload_avatar
+    @user = User.find_by(id: params[:id])
+    if @user
+      if params[:avator].present?
+        uploaded_file = params[:avator]
+        uploads_dir = Rails.root.join('public', 'uploads')
+        FileUtils.mkdir_p(uploads_dir)
+        file_path = uploads_dir.join(uploaded_file.original_filename)
+        File.open(file_path, 'wb') do |file|
+          file.write(uploaded_file.read)
+        end
+        relative_path = "uploads/#{uploaded_file.original_filename}"
+        image_url = URI.join(request.base_url, relative_path).to_s
+        if @user.update_column(:url, image_url)
+          render json: { avator: @user.url }, status: :ok
+        else
+          render json: { errors: 'User Update Failed!' }, status: :unprocessable_entity
+        end
+      else
+        render json: { errors: 'No picture uploaded' }, status: :bad_request
+      end
+    else
+      render json: { errors: 'User not found' }, status: :not_found
+    end
+  end
+
+  def get_avatar
+    user = User.find_by(id: params[:id])
+    if user
+      render json: {
+        avatar: user.url
+      }, status: :ok
+    else
+      render json: {
+        errors: 'User not found'
+      }, status: :not_found
     end
   end
 
