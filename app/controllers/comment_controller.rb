@@ -21,20 +21,22 @@ class CommentController < ApplicationController
     end
   end
 
-  def find_by_id
-    comment = Comment.find_by_id(params[:id])
-    if comment
-      render json: {
-        id: comment.id,
-        post_id: comment.post_id,
-        publisher: comment.publisher,
-        publisher_type: comment.publisher_type,
-        date: comment.date,
-        content: comment.content,
-        likes: comment.likes
+  def find_by_post_id
+    comments = Comment.where(post_id: params[:id])
+    if comments.any?
+      render json: comments.map { |comment| 
+        {
+          id: comment.id,
+          post_id: comment.post_id,
+          publisher: comment.publisher,
+          publisher_type: comment.publisher_type,
+          date: comment.date,
+          content: comment.content,
+          likes: comment.likes
+        }
       }, status: :ok
     else
-      render json: { error: 'Comment not found' }, status: :not_found
+      render json: { error: 'Comments not found' }, status: :not_found
     end
   end
 

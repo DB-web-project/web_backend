@@ -4,8 +4,8 @@ class PostController < ApplicationController
     if (params[:publisher_type] == 'User' && User.find_by(id: params[:publisher])) ||
        (params[:publisher_type] == 'Admin' && Admin.find_by(id: params[:publisher])) ||
        (params[:publisher_type] == 'Business' && Business.find_by(id: params[:publisher]))
-       if params[:picture].present?
-          uploaded_file = params[:picture]
+       if params[:image].present?
+          uploaded_file = params[:image]
           uploads_dir = Rails.root.join('public', 'uploads')
           FileUtils.mkdir_p(uploads_dir)
           file_path = uploads_dir.join(uploaded_file.original_filename)

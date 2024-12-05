@@ -61,7 +61,7 @@ Rails.application.routes.draw do
 
   # Comment
   post '/comment/post' => 'comment#post', as: :comment_post
-  get '/comment/find/:id' => 'comment#find_by_id', as: :comment_find_by_id
+  get '/comment/find_by_post_id/:id' => 'comment#find_by_post_id', as: :comment_find_by_id
   delete '/comment/delete/:id' => 'comment#delete_by_id', as: :comment_delete_by_id
 
   # Announcement
