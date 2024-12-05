@@ -100,8 +100,8 @@ class UserController < ApplicationController
   def upload_avatar
     @user = User.find_by(id: params[:id])
     if @user
-      if params[:avator].present?
-        uploaded_file = params[:avator]
+      if params[:avatar].present?
+        uploaded_file = params[:avatar]
         uploads_dir = Rails.root.join('public', 'uploads')
         FileUtils.mkdir_p(uploads_dir)
         file_path = uploads_dir.join(uploaded_file.original_filename)
@@ -111,7 +111,7 @@ class UserController < ApplicationController
         relative_path = "uploads/#{uploaded_file.original_filename}"
         image_url = URI.join(request.base_url, relative_path).to_s
         if @user.update_column(:url, image_url)
-          render json: { avator: @user.url }, status: :ok
+          render json: { avatar: @user.url }, status: :ok
         else
           render json: { errors: 'User Update Failed!' }, status: :unprocessable_entity
         end
