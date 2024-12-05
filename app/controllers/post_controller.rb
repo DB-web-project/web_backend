@@ -4,12 +4,26 @@ class PostController < ApplicationController
     if (params[:publisher_type] == 'User' && User.find_by(id: params[:publisher])) ||
        (params[:publisher_type] == 'Admin' && Admin.find_by(id: params[:publisher])) ||
        (params[:publisher_type] == 'Business' && Business.find_by(id: params[:publisher]))
-      post = Post.new(post_params)
-      post.likes = 0
-      if post.save
-        render json: { id: post.id }, status: :created
+       if params[:picture].present?
+          uploaded_file = params[:picture]
+          uploads_dir = Rails.root.join('public', 'uploads')
+          FileUtils.mkdir_p(uploads_dir)
+          file_path = uploads_dir.join(uploaded_file.original_filename)
+          File.open(file_path, 'wb') do |file|
+            file.write(uploaded_file.read)
+          end
+          relative_path = "uploads/#{uploaded_file.original_filename}"
+          image_url = URI.join(request.base_url, relative_path).to_s
+          post = Post.new(post_params)
+          post.likes = 0
+          post.url = image_url
+          if post.save
+            render json: { id: post.id }, status: :created
+          else
+            render json: { errors: post.errors.full_messages }, status: :bad_request
+          end
       else
-        render json: { errors: post.errors.full_messages }, status: :bad_request
+        render json: { errors: 'No picture uploaded' }, status: :bad_request
       end
     else
       render json: { errors: 'publisher not found' }, status: :not_found
@@ -26,7 +40,8 @@ class PostController < ApplicationController
         date: post.date,
         likes: post.likes,
         content: post.content,
-        title: post.title
+        title: post.title,
+        picture: post.url
       }, status: :ok
     else
       render json: { errors: 'post not found' }, status: :not_found
@@ -79,7 +94,8 @@ class PostController < ApplicationController
       publisher_type: params[:publisher_type],
       date: params[:date],
       content: params[:content],
-      title: params[:title]
+      title: params[:title],
+      image: params[:image]
     }
   end
 end
