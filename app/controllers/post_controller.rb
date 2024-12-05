@@ -17,6 +17,7 @@ class PostController < ApplicationController
           post = Post.new(post_params)
           post.likes = 0
           post.url = image_url
+          post.date = Time.now
           if post.save
             render json: { id: post.id }, status: :created
           else
