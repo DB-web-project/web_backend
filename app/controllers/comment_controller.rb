@@ -50,6 +50,16 @@ class CommentController < ApplicationController
     end
   end
 
+  def update_likes
+    comment = Comment.find_by_id(params[:id])
+    if comment
+      comment.likes = params[:likes]
+      render json: { message: 'Comment Updated' }, status: :ok
+    else
+      render json: { errors: 'Comment not found' }, status: :not_found
+    end
+  end
+
   private
 
   def comment_params

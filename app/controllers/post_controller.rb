@@ -75,12 +75,12 @@ class PostController < ApplicationController
 
   def find_by_publisher
     id = params[:id]
-    if Post.find_by(publisher: id)
-      posts = Post.where(publisher: id)
-      ids = []
-      posts.each do |post|
-        ids.push(post.id)
-      end
+    role = params[:role]
+  
+    posts = Post.where(publisher: id, publisher_type: role)
+  
+    if posts.exists?
+      ids = posts.pluck(:id)
       render json: { ids: ids }, status: :ok
     else
       render json: { errors: 'no posts found' }, status: :not_found

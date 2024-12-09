@@ -57,12 +57,13 @@ Rails.application.routes.draw do
   get '/post/find/:id' => 'post#find_by_id', as: :post_find_by_id
   get '/post/num/:num' => 'post#sum', as: :post_sum
   delete '/post/delete/:id' => 'post#delete_by_id', as: :post_delete_by_id
-  get '/post/publisher/:id' => 'post#find_by_publisher', as: :post_find_by_publisher
+  post '/post/find_by_publisher' => 'post#find_by_publisher', as: :post_find_by_publisher
 
   # Comment
   post '/comment/post' => 'comment#post', as: :comment_post
   get '/comment/find_by_post_id/:id' => 'comment#find_by_post_id', as: :comment_find_by_id
   delete '/comment/delete/:id' => 'comment#delete_by_id', as: :comment_delete_by_id
+  post '/comment/update_likes' => 'comment#update_likes', as: :comment_update_likes
 
   # Announcement
   post '/announcement/post' => 'announcement#post', as: :announcement_post
