@@ -1,5 +1,5 @@
 class CommentController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:post]
+  skip_before_action :verify_authenticity_token, only: %i[post update_likes]
 
   def post
     if (params[:publisher_type] == 'User' && User.find_by_id(params[:publisher])) ||
@@ -24,7 +24,7 @@ class CommentController < ApplicationController
   def find_by_post_id
     comments = Comment.where(post_id: params[:id])
     if comments.any?
-      render json: comments.map { |comment| 
+      render json: comments.map { |comment|
         {
           id: comment.id,
           post_id: comment.post_id,
@@ -54,7 +54,13 @@ class CommentController < ApplicationController
     comment = Comment.find_by_id(params[:id])
     if comment
       comment.likes = params[:likes]
-      render json: { message: 'Comment Updated' }, status: :ok
+      if comment.save
+        render json: { 
+            message: 'Comment Updated',
+        }, status: :ok
+      else
+        render json: { errors: 'Failed to update comment' }, status: :unprocessable_entity
+      end
     else
       render json: { errors: 'Comment not found' }, status: :not_found
     end

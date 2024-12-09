@@ -4,25 +4,25 @@ class PostController < ApplicationController
     if (params[:publisher_type] == 'User' && User.find_by(id: params[:publisher])) ||
        (params[:publisher_type] == 'Admin' && Admin.find_by(id: params[:publisher])) ||
        (params[:publisher_type] == 'Business' && Business.find_by(id: params[:publisher]))
-       if params[:image].present?
-          uploaded_file = params[:image]
-          uploads_dir = Rails.root.join('public', 'uploads')
-          FileUtils.mkdir_p(uploads_dir)
-          file_path = uploads_dir.join(uploaded_file.original_filename)
-          File.open(file_path, 'wb') do |file|
-            file.write(uploaded_file.read)
-          end
-          relative_path = "uploads/#{uploaded_file.original_filename}"
-          image_url = URI.join(request.base_url, relative_path).to_s
-          post = Post.new(post_params)
-          post.likes = 0
-          post.url = image_url
-          post.date = Time.now
-          if post.save
-            render json: { id: post.id }, status: :created
-          else
-            render json: { errors: post.errors.full_messages }, status: :bad_request
-          end
+      if params[:image].present?
+        uploaded_file = params[:image]
+        uploads_dir = Rails.root.join('public', 'uploads')
+        FileUtils.mkdir_p(uploads_dir)
+        file_path = uploads_dir.join(uploaded_file.original_filename)
+        File.open(file_path, 'wb') do |file|
+          file.write(uploaded_file.read)
+        end
+        relative_path = "uploads/#{uploaded_file.original_filename}"
+        image_url = URI.join(request.base_url, relative_path).to_s
+        post = Post.new(post_params)
+        post.likes = 0
+        post.url = image_url
+        post.date = Time.now
+        if post.save
+          render json: { id: post.id }, status: :created
+        else
+          render json: { errors: post.errors.full_messages }, status: :bad_request
+        end
       else
         render json: { errors: 'No picture uploaded' }, status: :bad_request
       end
@@ -76,10 +76,21 @@ class PostController < ApplicationController
   def find_by_publisher
     id = params[:id]
     role = params[:role]
-  
+
     posts = Post.where(publisher: id, publisher_type: role)
-  
+
     if posts.exists?
+      ids = posts.pluck(:id)
+      render json: { ids: ids }, status: :ok
+    else
+      render json: { errors: 'no posts found' }, status: :not_found
+    end
+  end
+
+  def search
+    keyword = params[:keyword]
+    posts = Post.where('title LIKE ? OR content LIKE ?', "%#{keyword}%", "%#{keyword}%")
+    if posts.any?
       ids = posts.pluck(:id)
       render json: { ids: ids }, status: :ok
     else

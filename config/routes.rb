@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   get '/commodity/business/:id' => 'commodity#find_by_business', as: :commodity_find_by_business
   post '/commodity/upload' => 'commodity#upload_homepage', as: :commodity_upload_homepage
   get '/commodity/get_homepage/:id' => 'commodity#get_homepage', as: :commodity_get_homepage
+  get '/commodity/search' => 'commodity/search', as: :commodity_search
 
   # Post
   post '/post/post' => 'post#post', as: :post_post
@@ -58,6 +59,7 @@ Rails.application.routes.draw do
   get '/post/num/:num' => 'post#sum', as: :post_sum
   delete '/post/delete/:id' => 'post#delete_by_id', as: :post_delete_by_id
   post '/post/find_by_publisher' => 'post#find_by_publisher', as: :post_find_by_publisher
+  get '/post/search' => 'post#search', as: :post_search
 
   # Comment
   post '/comment/post' => 'comment#post', as: :comment_post
