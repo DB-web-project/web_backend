@@ -66,6 +66,76 @@ class CommentController < ApplicationController
     end
   end
 
+  def increase_likes
+    user_id = params[:user_id]
+    comment_id = params[:comment_id]
+
+    if user_id.nil? || comment_id.nil?
+      render json: { error: 'Missing user_id or comment_id' }, status: :bad_request
+      return
+    end
+
+    user = User.find_by(id: user_id)
+    comment = Comment.find_by(id: comment_id)
+
+    if user.nil?
+      render json: { error: 'User not found' }, status: :not_found
+      return
+    end
+
+    if comment.nil?
+      render json: { error: 'Comment not found' }, status: :not_found
+      return
+    end
+
+    like = Like.find_or_initialize_by(user_id: user_id, comment_id: comment_id)
+
+    if like.new_record?
+      like.save
+      # 统计点赞总数
+      total_likes = Like.where(comment_id: comment_id).count
+      comment.update(likes: total_likes)
+      render json: { likes: total_likes }, status: :ok
+    else
+      render json: { error: 'Already liked' }, status: :unprocessable_entity
+    end
+  end
+
+  def cancel_likes
+    user_id = params[:user_id]
+    comment_id = params[:comment_id]
+
+    if user_id.nil? || comment_id.nil?
+      render json: { error: 'Missing user_id or comment_id' }, status: :bad_request
+      return
+    end
+
+    user = User.find_by(id: user_id)
+    comment = Comment.find_by(id: comment_id)
+
+    if user.nil?
+      render json: { error: 'User not found' }, status: :not_found
+      return
+    end
+
+    if comment.nil?
+      render json: { error: 'Comment not found' }, status: :not_found
+      return
+    end
+
+    like = Like.find_by(user_id: user_id, comment_id: comment_id)
+
+    if like
+      like.destroy
+      # 统计点赞总数
+      total_likes = Like.where(comment_id: comment_id).count
+      comment.update(likes: total_likes)
+      render json: { likes: total_likes }, status: :ok
+    else
+      render json: { error: 'Like not found' }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def comment_params

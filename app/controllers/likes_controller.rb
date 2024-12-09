@@ -57,6 +57,37 @@ class LikesController < ApplicationController
     end
   end
 
+  def check
+    user_id = params[:user_id]
+    comment_id = params[:comment_id]
+
+    if user_id.nil? || comment_id.nil?
+      render json: { error: 'Missing user_id or comment_id' }, status: :bad_request
+      return
+    end
+
+    user = User.find_by(id: user_id)
+    comment = Comment.find_by(id: comment_id)
+
+    if user.nil?
+      render json: { error: 'User not found' }, status: :not_found
+      return
+    end
+
+    if comment.nil?
+      render json: { error: 'Comment not found' }, status: :not_found
+      return
+    end
+
+    like = Like.find_by(user_id: user_id, comment_id: comment_id)
+
+    if like
+      render json: { liked: 1 }, status: :ok
+    else
+      render json: { liked: 0 }, status: :ok
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_like

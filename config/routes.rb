@@ -71,6 +71,9 @@ Rails.application.routes.draw do
   get '/comment/find_by_post_id/:id' => 'comment#find_by_post_id', as: :comment_find_by_id
   delete '/comment/delete/:id' => 'comment#delete_by_id', as: :comment_delete_by_id
   post '/comment/update_likes' => 'comment#update_likes', as: :comment_update_likes
+  post '/comment/increase_likes' => 'comment#increase_likes', as: :comment_increase_likes
+  post '/comment/cancel_likes' => 'comment/cancel_likes', as: :comment_concel_likes
+  post '/likes/check' => 'likes#check', as: :likes_check
 
   # Announcement
   post '/announcement/post' => 'announcement#post', as: :announcement_post
