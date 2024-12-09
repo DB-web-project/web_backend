@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :scores
+  resources :likes
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -51,7 +53,10 @@ Rails.application.routes.draw do
   get '/commodity/business/:id' => 'commodity#find_by_business', as: :commodity_find_by_business
   post '/commodity/upload' => 'commodity#upload_homepage', as: :commodity_upload_homepage
   get '/commodity/get_homepage/:id' => 'commodity#get_homepage', as: :commodity_get_homepage
-  get '/commodity/search' => 'commodity/search', as: :commodity_search
+  get '/commodity/search' => 'commodity#search', as: :commodity_search
+  post '/commodity/update_score' => 'commodity#update_score', as: :commodity_update_score
+  post '/commodity/cancel_score' => 'commodity#cancel_score', as: :commodity_cancel_score
+  post '/scores/check' => 'scores#check', as: :scores_check
 
   # Post
   post '/post/post' => 'post#post', as: :post_post

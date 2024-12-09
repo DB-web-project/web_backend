@@ -9,7 +9,7 @@ class CommodityController < ApplicationController
       if commodity.save
         render json: {
           id: commodity.id,
-          score: 10,
+          score: 0,
           homepage: commodity.url
         }, status: :created
       else
@@ -100,6 +100,75 @@ class CommodityController < ApplicationController
         errors: 'Commodity not found'
       }, status: :not_found
     end
+  end
+
+  def update_score
+    user_id = params[:user_id]
+    commodity_id = params[:commodity_id]
+    score = params[:score]
+
+    if user_id.nil? || commodity_id.nil? || score.nil?
+      render json: { error: 'Missing user_id, commodity_id, or score' }, status: :bad_request
+      return
+    end
+
+    user = User.find_by(id: user_id)
+    commodity = Commodity.find_by(id: commodity_id)
+
+    if user.nil?
+      render json: { error: 'User not found' }, status: :not_found
+      return
+    end
+
+    if commodity.nil?
+      render json: { error: 'Commodity not found' }, status: :not_found
+      return
+    end
+
+    score_record = Score.find_or_initialize_by(user_id: user_id, commodity_id: commodity_id)
+    score_record.score = score
+
+    if score_record.save
+      average_score = Score.where(commodity_id: commodity_id).average(:score)
+      render json: { score: average_score }
+    else
+      render json: { error: 'Failed to update score' }, status: :unprocessable_entity
+    end
+  end
+
+  def cancel_score
+    user_id = params[:user_id]
+    commodity_id = params[:commodity_id]
+
+    if user_id.nil? || commodity_id.nil?
+      render json: { error: 'Missing user_id or commodity_id' }, status: :bad_request
+      return
+    end
+
+    user = User.find_by(id: user_id)
+    commodity = Commodity.find_by(id: commodity_id)
+
+    if user.nil?
+      render json: { error: 'User not found' }, status: :not_found
+      return
+    end
+
+    if commodity.nil?
+      render json: { error: 'Commodity not found' }, status: :not_found
+      return
+    end
+
+    score_record = Score.find_by(user_id: user_id, commodity_id: commodity_id)
+
+    if score_record.nil?
+      render json: { error: 'Score not found' }, status: :not_found
+      return
+    end
+
+    score_record.destroy
+
+    average_score = Score.where(commodity_id: commodity_id).average(:score)
+    render json: { score: average_score }
   end
 
   def find_by_business

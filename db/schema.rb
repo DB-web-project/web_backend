@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_05_115727) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_09_161247) do
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -69,6 +69,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_05_115727) do
     t.index ["business_id"], name: "index_commodities_on_business_id"
   end
 
+  create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "publisher"
     t.string "publisher_type"
@@ -93,6 +100,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_05_115727) do
     t.string "preferable_type", null: false
     t.bigint "preferable_id", null: false
     t.index ["preferable_type", "preferable_id"], name: "index_preferences_on_preferable"
+  end
+
+  create_table "scores", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "commodity_id"
+    t.decimal "score", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
