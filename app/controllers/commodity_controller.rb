@@ -23,11 +23,12 @@ class CommodityController < ApplicationController
   def find_by_id
     commodity = Commodity.find_by(id: params[:id])
     if commodity
+      average_score = Score.where(commodity_id: params[:id]).average(:score)
       render json: {
         id: commodity.id,
         name: commodity.name,
         price: commodity.price,
-        score: commodity.score,
+        score: average_score,
         introduction: commodity.introduction,
         business_id: commodity.business_id,
         homepage: commodity.url
