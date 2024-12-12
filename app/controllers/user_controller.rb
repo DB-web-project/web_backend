@@ -6,7 +6,7 @@ class UserController < ApplicationController
       user = User.new(user_params)
       if user.save
         preference = Preference.create(preferable: user)
-        user.update(preference: preference, url: '/path/to/default/avator.jpg')
+        user.update(preference: preference, url: 'http://47.93.172.156:8081/uploads/BUAA.jpg')
         render json: {
           id: user.id,
           preference: user.preference.id,

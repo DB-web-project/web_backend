@@ -7,7 +7,7 @@ class BusinessController < ApplicationController
       if business.save
         preference = Preference.create(preferable: business) # 选择外键为business
         tag = Tag.create
-        business.update(preference: preference, url: '/path/to/default/avator.jpg', tag: tag, score: 10)
+        business.update(preference: preference, url: 'http://47.93.172.156:8081/uploads/BUAA.jpg', tag: tag, score: 10)
         render json: {
           id: business.id,
           tag: business.tag.id,

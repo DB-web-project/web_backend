@@ -6,7 +6,7 @@ class AdminController < ApplicationController
       admin = Admin.new(admin_params)
       if admin.save
         preference = Preference.create(preferable: admin)
-        admin.update(preference: preference, url: '/path/to/default/avator.jpg')
+        admin.update(preference: preference, url: 'http://47.93.172.156:8081/uploads/BUAA.jpg')
         render json: {
           id: admin.id,
           preference: admin.preference.id,

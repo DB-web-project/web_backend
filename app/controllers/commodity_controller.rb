@@ -5,7 +5,7 @@ class CommodityController < ApplicationController
       commodity = Commodity.new(commodity_params_register)
       commodity.score = 0
       commodity.rating_count = 0
-      commodity.url = '/path/to/default/homepage.png'
+      commodity.url = 'http://47.93.172.156:8081/uploads/NMB.jpg'
       if commodity.save
         render json: {
           id: commodity.id,

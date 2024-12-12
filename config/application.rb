@@ -26,11 +26,11 @@ module Project
     #
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'http://localhost:8080'
+        origins '*' # 允许所有来源
         resource '*',
                  headers: :any,
                  methods: %i[get post put patch delete options head],
-                 credentials: true
+                 credentials: false
       end
     end
   end
