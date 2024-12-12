@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   delete '/post/delete/:id' => 'post#delete_by_id', as: :post_delete_by_id
   post '/post/find_by_publisher' => 'post#find_by_publisher', as: :post_find_by_publisher
   get '/post/search' => 'post#search', as: :post_search
+  get '/post/all' => 'post#get_all', as: :post_get_all
 
   # Comment
   post '/comment/post' => 'comment#post', as: :comment_post

@@ -98,6 +98,16 @@ class PostController < ApplicationController
     end
   end
 
+  def get_all
+    posts = Post.all
+    if posts.any?
+      ids = posts.pluck(:id)
+      render json: { ids: ids }, status: :ok
+    else
+      render json: { errors: 'no commodities found' }, status: :not_found
+    end
+  end
+
   private
 
   def post_params
