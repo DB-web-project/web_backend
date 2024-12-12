@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   post '/commodity/update_score' => 'commodity#update_score', as: :commodity_update_score
   post '/commodity/cancel_score' => 'commodity#cancel_score', as: :commodity_cancel_score
   post '/scores/check' => 'scores#check', as: :scores_check
+  get '/commodity/all' => 'commodity#get_all', as: :commodity_get_all
 
   # Post
   post '/post/post' => 'post#post', as: :post_post

@@ -236,6 +236,16 @@ class CommodityController < ApplicationController
     end
   end
 
+  def get_all
+    commodities = Commodity.all
+    if commodities.any?
+      ids = commodities.pluck(:id)
+      render json: { ids: ids }, status: :ok
+    else
+      render json: { errors: 'no commodities found' }, status: :not_found
+    end
+  end
+
   private # 定义不同的方法来过滤参数
 
   def commodity_params_register
